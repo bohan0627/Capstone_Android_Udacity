@@ -1,23 +1,30 @@
 package com.bohan.android.capstone.model;
 
+import com.bohan.android.capstone.model.ModelHelper.ComicImageHelper;
+import com.bohan.android.capstone.model.ModelHelper.ComicPublisherHelper;
 import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
 import io.reactivex.annotations.Nullable;
 
 /**
  * Created by Bo Han.
+ * Please refer to the ComicCharacter.class for the related variable description
  */
 @AutoValue
 public abstract class ComicCharacterList {
-    public abstract long comicId();
-    @Nullable
-    public abstract String name();
-    @Nullable
-    public abstract ComicImages image();
-    @Nullable
-    public abstract ComicPublisherInfo publisher();
 
-    public static TypeAdapter<ComicCharacterInfoList> typeAdapter(Gson gson) {
-        return new AutoValue_ComicCharacterInfoList.GsonTypeAdapter(gson);
+    @Nullable
+    public abstract long characterId();
+    @Nullable
+    public abstract String characterName();
+    @Nullable
+    public abstract ComicImageHelper characterMainImage();
+    @Nullable
+    public abstract ComicPublisherHelper characterMainPublisher();
+
+    public static TypeAdapter<ComicCharacterList> typeAdapter(Gson gson) {
+        return new AutoValue_ComicCharacterList.GsonTypeAdapter(gson);
     }
 }
