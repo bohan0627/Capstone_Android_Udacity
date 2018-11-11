@@ -3,18 +3,23 @@ package com.bohan.android.capstone;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
+import com.squareup.leakcanary.LeakCanary;
+
+import timber.log.Timber;
+
 /**
  * Created by Bo Han.
  */
 public class ComicsLoverApp extends Application {
-    private static ComicsLoverAppComponent comicserAppComponent;
+    private static ComicsLoverAppComponent comicsLoverAppComponent;
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
 
-        if (comicserAppComponent == null) {
-            comicserAppComponent = DaggerComicsLoverAppComponent.builder()
+        if (comicsLoverAppComponent == null) {
+            comicsLoverAppComponent = DaggerComicsLoverAppComponent.builder()
                     .comicserAppModule(new ComicsLoverAppModule(this))
                     .build();
         }
@@ -40,7 +45,7 @@ public class ComicsLoverApp extends Application {
         }
     }
 
-    public static ComicserAppComponent getAppComponent() {
-        return comicserAppComponent;
+    public static ComicsLoverAppComponent getAppComponent() {
+        return comicsLoverAppComponent;
     }
 }
