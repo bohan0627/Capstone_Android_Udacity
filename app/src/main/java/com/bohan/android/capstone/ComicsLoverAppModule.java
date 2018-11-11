@@ -5,6 +5,10 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import javax.inject.Singleton;
+
+import dagger.Provides;
+
 /**
  * Created by Bo Han.
  */
@@ -17,10 +21,16 @@ public class ComicsLoverAppModule {
         this.comicsLoverApp = comicsLoverApp;
     }
 
+    @NonNull
+    @Provides
+    @Singleton
     Context provideContext(){
         return comicsLoverApp;
     }
 
+    @NonNull
+    @Provides
+    @Singleton
     FirebaseAnalytics provideFirebaseAnalytics(Context context) {
         return FirebaseAnalytics.getInstance(context);
     }
