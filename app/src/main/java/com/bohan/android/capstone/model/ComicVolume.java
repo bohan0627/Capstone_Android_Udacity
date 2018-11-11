@@ -54,6 +54,6 @@ public abstract class ComicVolume {
 
 
     public static TypeAdapter<ComicVolumeInfo> typeAdapter(Gson gson) {
-        return new AutoValue_ComicVolumeInfo.GsonTypeAdapter(gson);
+        return new AutoValue_ComicVolume.GsonTypeAdapter(gson);
     }
 }

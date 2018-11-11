@@ -19,6 +19,6 @@ public abstract class ComicOrigin {
     public abstract String originName();
 
     public static TypeAdapter<ComicOrigin> typeAdapter(Gson gson) {
-        return new AutoValue_ComicOriginShort.GsonTypeAdapter(gson);
+        return new AutoValue_ComicOrigin.GsonTypeAdapter(gson);
     }
 }

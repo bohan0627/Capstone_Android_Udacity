@@ -35,7 +35,7 @@ public abstract class ComicVolumeList {
     public abstract int volumeIssuesCount();
 
     public static Builder builder() {
-        return new AutoValue_ComicVolumeInfoList.Builder();
+        return new AutoValue_ComicVolumeList.Builder();
     }
 
     public static TypeAdapter<ComicVolumeList> typeAdapter(Gson gson) {

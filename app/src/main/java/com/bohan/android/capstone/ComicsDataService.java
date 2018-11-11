@@ -1,15 +1,25 @@
 package com.bohan.android.capstone;
 
+import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
+import com.bohan.android.capstone.model.ComicCharacter;
+import com.bohan.android.capstone.model.ComicCharacterList;
+import com.bohan.android.capstone.model.ComicIssue;
+import com.bohan.android.capstone.model.ComicIssueList;
+import com.bohan.android.capstone.model.ComicVolume;
+import com.bohan.android.capstone.model.ComicVolumeList;
+import com.bohan.android.capstone.model.ModelHelper.ServerHelper;
+
 /**
  * Created by Bo Han.
  */
-public class ComicsDataService {
+public interface ComicsDataService {
 
     // This info from Comic Vine Website
     final String ENDPOINT = "https://comicvine.gamespot.com/";
@@ -24,34 +34,34 @@ public class ComicsDataService {
 
     // Request issues list
     @GET("/api/issues/")
-    Observable<ServerResponse<List<ComicIssueInfoList>>> getIssuesList(
+    Observable<ServerHelper<List<ComicIssueList>>> getIssuesList(
             @QueryMap Map<String, String> options);
 
     // Request characters list
     @GET("/api/characters/")
-    Observable<ServerResponse<List<ComicCharacterInfoList>>> getCharactersList(
+    Observable<ServerHelper<List<ComicCharacterList>>> getCharactersList(
             @QueryMap Map<String, String> options);
 
     // Request volumes list
     @GET("/api/volumes/")
-    Observable<ServerResponse<List<ComicVolumeInfoList>>> getVolumesList(
+    Observable<ServerHelper<List<ComicVolumeList>>> getVolumesList(
             @QueryMap Map<String, String> options);
 
     // Request issue details
     @GET("/api/issue/" + ISSUE_TYPE_CODE + "-{id}/")
-    Observable<ServerResponse<ComicIssueInfo>> getIssueDetails(
+    Observable<ServerHelper<ComicIssue>> getIssueDetails(
             @Path("id") long issueId,
             @QueryMap Map<String, String> options);
 
     // Request character details
     @GET("/api/character/" + CHARACTER_TYPE_CODE + "-{id}/")
-    Observable<ServerResponse<ComicCharacterInfo>> getCharacterDetails(
+    Observable<ServerHelper<ComicCharacter>> getCharacterDetails(
             @Path("id") long characterId,
             @QueryMap Map<String, String> options);
 
     // Request volume details
     @GET("/api/volume/" + VOLUME_TYPE_CODE + "-{id}/")
-    Observable<ServerResponse<ComicVolumeInfo>> getVolumeDetails(
+    Observable<ServerHelper<ComicVolume>> getVolumeDetails(
             @Path("id") long volumeId,
             @QueryMap Map<String, String> options);
 
