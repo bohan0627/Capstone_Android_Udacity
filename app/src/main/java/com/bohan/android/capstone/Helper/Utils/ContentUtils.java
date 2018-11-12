@@ -7,6 +7,7 @@ import android.net.Uri;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.model.ComicModel.ComicIssue;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
+import com.bohan.android.capstone.model.ComicModel.ComicVolume;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeShort;
 import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
@@ -35,50 +36,67 @@ public class ContentUtils {
                 .build();
     }
 
-    public static ComicVolumeList shortenVolumeInfo(ComicVolumeInfo volume) {
+    public static ComicVolumeList volumeWithShortInfo(ComicVolume volume) {
         return ComicVolumeList.builder()
-                .id(volume.id())
-                .count_of_issues(volume.count_of_issues())
-                .image(volume.image())
-                .name(volume.name())
-                .publisher(volume.publisher())
-                .start_year(volume.start_year())
+                .volumeId(volume.volumeId())
+                .volumeIssuesCount(volume.issuesCount())
+                .volumeMainImage(volume.volumeMainImage())
+                .volumeName(volume.volumeName())
+                .mainPublisher(volume.mainPublisher())
+                .volumeStartYear(volume.volumeStartYear())
                 .build();
     }
 
-    public static ContentValues issueInfoToContentValues(@NonNull ComicIssueList issue) {
+    public static ContentValues contentValuesFromIssue(@NonNull ComicIssueList issueList) {
 
-        ContentValues values = new ContentValues();
-        values.put(IssueEntry.COLUMN_ISSUE_ID, issue.id());
-        values.put(IssueEntry.COLUMN_ISSUE_NUMBER, issue.issue_number());
-        values.put(IssueEntry.COLUMN_ISSUE_NAME, issue.name());
-        values.put(IssueEntry.COLUMN_ISSUE_STORE_DATE, issue.store_date());
-        values.put(IssueEntry.COLUMN_ISSUE_COVER_DATE, issue.cover_date());
-        values.put(IssueEntry.COLUMN_ISSUE_SMALL_IMAGE, issue.image().small_url());
-        values.put(IssueEntry.COLUMN_ISSUE_MEDIUM_IMAGE, issue.image().medium_url());
-        values.put(IssueEntry.COLUMN_ISSUE_HD_IMAGE, issue.image().super_url());
-        values.put(IssueEntry.COLUMN_ISSUE_VOLUME_ID, issue.volume().id());
-        values.put(IssueEntry.COLUMN_ISSUE_VOLUME_NAME, issue.volume().name());
+        ContentValues contentValues = new ContentValues();
 
-        return values;
+        contentValues.put(IssueEntry.COLUMN_ISSUE_ID, issueList.issueId());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_NUMBER, issueList.issueNumber());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_NAME, issueList.issueName());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_FIRST_STORE_DATE, issueList.issueFirstStoreDate());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_COVER_DATE, issueList.issueCoverDate());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_SMALL_IMAGE, issueList.issueMainImage().imageSmallUrl());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_MEDIUM_IMAGE, issueList.issueMainImage().imageMediumUrl());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_HD_IMAGE, issueList.issueMainImage().imageSuperUrl());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_VOLUME_ID, issueList.volume().volumeId());
+        contentValues.put(IssueEntry.COLUMN_ISSUE_VOLUME_NAME, issueList.volume().volumeName());
+
+        return contentValues;
     }
 
-    public static Set<Long> getIdsFromCursor(Cursor cursor) {
+    public static ContentValues contentValuesFromVolume(@NonNull ComicVolumeList volumeList) {
 
-        Set<Long> result = new HashSet<>(cursor.getCount());
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_ID, volumeList.volumeId());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_NAME, volumeList.volumeName());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_ISSUES_COUNT, volumeList.volumeIssuesCount());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_PUBLISHER_NAME, volumeList.mainPublisher().publisherName());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_START_YEAR, volumeList.volumeStartYear());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE, volumeList.volumeMainImage().imageSmallUrl());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_MEDIUM_IMAGE, volumeList.volumeMainImage().imageMediumUrl());
+        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_HD_IMAGE, volumeList.volumeMainImage().imageSuperUrl());
+
+        return contentValues;
+    }
+
+    public static Set<Long> idsFromCursor(Cursor cursor) {
+
+        Set<Long> ids = new HashSet<>(cursor.getCount());
 
         cursor.moveToPosition(-1);
 
         while(cursor.moveToNext()) {
             long id = cursor.getLong(0);
-            result.add(id);
+            ids.add(id);
         }
 
-        return result;
+        return ids;
     }
 
 
-    public static List<ComicIssueList> issueInfoFromCursor(Cursor cursor) {
+    public static List<ComicIssueList> issuesFromCursor(Cursor cursor) {
 
         List<ComicIssueList> issues = new ArrayList<>();
 
@@ -87,7 +105,7 @@ public class ContentUtils {
 
             while (cursor.moveToNext()) {
 
-                long id = cursor
+                long issueId = cursor
                         .getLong(cursor.getColumnIndexOrThrow(IssueEntry.COLUMN_ISSUE_ID));
                 int number = cursor
                         .getInt(cursor.getColumnIndexOrThrow(IssueEntry.COLUMN_ISSUE_NUMBER));
@@ -109,7 +127,7 @@ public class ContentUtils {
                         .getString(cursor.getColumnIndexOrThrow(IssueEntry.COLUMN_ISSUE_VOLUME_NAME));
 
                 ComicIssueList issue = ComicIssueList.builder()
-                        .issueId(id)
+                        .issueId(issueId)
                         .issueMainImage(
                                 ComicImageHelper.builder()
                                         .imageIconUrl("")
@@ -126,8 +144,8 @@ public class ContentUtils {
                         .issueCoverDate(coverDate)
                         .volume(
                                 ComicVolumeShort.builder()
-                                        .id(volumeId)
-                                        .name(volumeName)
+                                        .volumeId(volumeId)
+                                        .volumeName(volumeName)
                                         .build())
                         .build();
 
@@ -138,26 +156,12 @@ public class ContentUtils {
         return issues;
     }
 
-    public static ContentValues volumeInfoToContentValues(@NonNull ComicVolumeList volume) {
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_ID, volume.volumeId());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_NAME, volume.volumeName());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_ISSUES_COUNT, volume.volumeIssuesCount());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_PUBLISHER_NAME, volume.mainPublisher().publisherName());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_START_YEAR, volume.volumeStartYear());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE, volume.volumeMainImage().imageSmallUrl());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_MEDIUM_IMAGE, volume.volumeMainImage().imageMediumUrl());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_HD_IMAGE, volume.volumeMainImage().imageSuperUrl());
-
-        return contentValues;
-    }
 
 
-    public static Uri buildDetailsUri(Uri baseUri, long recordId) {
+
+    public static Uri detailsUri(Uri baseUri, long id) {
         return baseUri.buildUpon()
-                .appendPath(String.valueOf(recordId))
+                .appendPath(String.valueOf(id))
                 .build();
     }
 }

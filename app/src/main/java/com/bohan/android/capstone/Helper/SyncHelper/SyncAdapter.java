@@ -103,7 +103,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         // If notification text is not empty, display it
         if (notificationText.length() > 0) {
-            NotificationUtils.notifyUserAboutUpdate(
+            NotificationUtils.updateNotification(
                     getContext(),
                     notificationText.deleteCharAt(notificationText.length() - 2).toString());
         }

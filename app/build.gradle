@@ -90,6 +90,11 @@ dependencies {
 
     implementation 'com.android.support:palette-v7:27.1.1'
 
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.8.0'
+    implementation 'com.ryanharter.auto.value:auto-value-gson-annotations:0.8.0'
+
+    implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
+
     //implementation 'com.android.support:support-v13:27.1.1'
 
 }

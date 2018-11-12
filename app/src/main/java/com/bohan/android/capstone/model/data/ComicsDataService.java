@@ -32,14 +32,14 @@ public interface ComicsDataService {
      * Issues, Characters and Volumes
      */
 
-    // Request issues list
-    @GET("/api/issues/")
-    Observable<ServerHelper<List<ComicIssueList>>> getIssuesList(
-            @QueryMap Map<String, String> options);
-
     // Request characters list
     @GET("/api/characters/")
     Observable<ServerHelper<List<ComicCharacterList>>> getCharactersList(
+            @QueryMap Map<String, String> options);
+
+    // Request issues list
+    @GET("/api/issues/")
+    Observable<ServerHelper<List<ComicIssueList>>> getIssuesList(
             @QueryMap Map<String, String> options);
 
     // Request volumes list
@@ -47,16 +47,16 @@ public interface ComicsDataService {
     Observable<ServerHelper<List<ComicVolumeList>>> getVolumesList(
             @QueryMap Map<String, String> options);
 
-    // Request issue details
-    @GET("/api/issue/" + ISSUE_TYPE_CODE + "-{id}/")
-    Observable<ServerHelper<ComicIssue>> getIssueDetails(
-            @Path("id") long issueId,
-            @QueryMap Map<String, String> options);
-
     // Request character details
     @GET("/api/character/" + CHARACTER_TYPE_CODE + "-{id}/")
     Observable<ServerHelper<ComicCharacter>> getCharacterDetails(
             @Path("id") long characterId,
+            @QueryMap Map<String, String> options);
+
+    // Request issue details
+    @GET("/api/issue/" + ISSUE_TYPE_CODE + "-{id}/")
+    Observable<ServerHelper<ComicIssue>> getIssueDetails(
+            @Path("id") long issueId,
             @QueryMap Map<String, String> options);
 
     // Request volume details
