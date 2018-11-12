@@ -1,7 +1,6 @@
 package com.bohan.android.capstone.model.ComicsLoverApp;
 
-import com.bohan.android.capstone.ComicPrefsHelperModule;
-import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverAppModule;
+import com.bohan.android.capstone.model.Prefs.ComicPrefsHelperModule;
 
 import javax.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.Helper;
+package com.bohan.android.capstone.Helper.SyncHelper;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;

@@ -1,4 +1,4 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.Prefs;
 
 import android.content.Context;
 

@@ -1,7 +1,9 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.Prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.bohan.android.capstone.R;
 
 import java.util.HashSet;
 import java.util.Set;

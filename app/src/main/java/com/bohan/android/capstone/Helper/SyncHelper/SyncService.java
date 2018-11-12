@@ -1,8 +1,10 @@
-package com.bohan.android.capstone.Helper;
+package com.bohan.android.capstone.Helper.SyncHelper;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
+import com.bohan.android.capstone.Helper.SyncHelper.SyncAdapter;
 
 import io.reactivex.annotations.Nullable;
 

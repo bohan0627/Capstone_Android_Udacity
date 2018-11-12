@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.Helper;
+package com.bohan.android.capstone.Helper.SyncHelper;
 
 import android.accounts.Account;
 import android.content.AbstractThreadedSyncAdapter;
@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.content.SyncResult;
 import android.os.Bundle;
 
-import com.bohan.android.capstone.ComicPrefsHelper;
+import com.bohan.android.capstone.model.Prefs.ComicPrefsHelper;
 import com.bohan.android.capstone.model.data.ComicRemoteSource;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.data.ComicLocalSource;
