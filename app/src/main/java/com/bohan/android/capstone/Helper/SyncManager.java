@@ -6,7 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.bohan.android.capstone.ComicContract;
+import com.bohan.android.capstone.model.data.ComicContract;
 
 import timber.log.Timber;
 

@@ -1,4 +1,4 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.ComicsLoverApp;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.IssueDetails;
 
-import com.bohan.android.capstone.model.ComicIssue;
+import com.bohan.android.capstone.model.ComicModel.ComicIssue;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
 /**

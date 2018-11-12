@@ -2,8 +2,8 @@ package com.bohan.android.capstone.MVP.VolumeList;
 
 import android.os.Bundle;
 
-import com.bohan.android.capstone.ComicRemoteSource;
-import com.bohan.android.capstone.model.ComicVolumeList;
+import com.bohan.android.capstone.model.data.ComicRemoteSource;
+import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.analytics.FirebaseAnalytics.Param;
 import com.google.firebase.analytics.FirebaseAnalytics.Event;

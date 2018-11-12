@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.VolumeList;
 
-import com.bohan.android.capstone.model.ComicVolumeList;
+import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
 import java.util.List;

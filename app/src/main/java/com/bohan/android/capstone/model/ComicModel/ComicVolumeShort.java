@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model;
+package com.bohan.android.capstone.model.ComicModel;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;

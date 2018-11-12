@@ -1,4 +1,4 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.data;
 
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
-import com.bohan.android.capstone.model.ComicCharacter;
-import com.bohan.android.capstone.model.ComicCharacterList;
-import com.bohan.android.capstone.model.ComicIssue;
-import com.bohan.android.capstone.model.ComicIssueList;
-import com.bohan.android.capstone.model.ComicVolume;
-import com.bohan.android.capstone.model.ComicVolumeList;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacter;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
+import com.bohan.android.capstone.model.ComicModel.ComicIssue;
+import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
+import com.bohan.android.capstone.model.ComicModel.ComicVolume;
+import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.bohan.android.capstone.Helper.ModelHelper.ServerHelper;
 
 /**

@@ -1,7 +1,7 @@
 package com.bohan.android.capstone.MVP.CharacterDetails;
 
-import com.bohan.android.capstone.ComicRemoteSource;
-import com.bohan.android.capstone.model.ComicCharacter;
+import com.bohan.android.capstone.model.data.ComicRemoteSource;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacter;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.data;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

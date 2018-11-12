@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Binder;
 import android.widget.RemoteViews;
-import android.widget.RemoteViewsService;
 
-import com.bohan.android.capstone.ComicContract;
-import com.bohan.android.capstone.ComicsLoverApp;
+import com.bohan.android.capstone.model.data.ComicContract;
+import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.R;
 
 import android.widget.RemoteViewsService.RemoteViewsFactory;

@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.IssueList;
 
-import com.bohan.android.capstone.model.ComicIssueList;
+import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
 import java.util.List;

@@ -1,9 +1,8 @@
 package com.bohan.android.capstone.MVP.IssueDetails;
 
-import com.bohan.android.capstone.ComicRemoteSource;
-import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsView;
-import com.bohan.android.capstone.model.ComicIssue;
-import com.bohan.android.capstone.model.ComicLocalSource;
+import com.bohan.android.capstone.model.data.ComicRemoteSource;
+import com.bohan.android.capstone.model.ComicModel.ComicIssue;
+import com.bohan.android.capstone.model.data.ComicLocalSource;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import javax.inject.Inject;

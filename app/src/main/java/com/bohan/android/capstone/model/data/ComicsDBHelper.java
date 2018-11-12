@@ -1,11 +1,11 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bohan.android.capstone.ComicContract.IssueEntry;
-import com.bohan.android.capstone.ComicContract.TrackedVolumeEntry;
+import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
+import com.bohan.android.capstone.model.data.ComicContract.TrackedVolumeEntry;
 /**
  * Created by Bo Han
  * This is for creating and updating the database and tables

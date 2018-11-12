@@ -1,8 +1,11 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.model.ComicsLoverApp;
 
 import android.app.Application;
 import android.content.Context;
 
+import com.bohan.android.capstone.BuildConfig;
+import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverAppComponent;
+import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverAppModule;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 

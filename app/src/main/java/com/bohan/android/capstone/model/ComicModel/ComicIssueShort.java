@@ -1,4 +1,6 @@
-package com.bohan.android.capstone.model;
+package com.bohan.android.capstone.model.ComicModel;
+
+
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -20,21 +22,23 @@ public abstract class ComicIssueShort {
     @Nullable
     public abstract int issueNumber();
 
+    public static ComicIssueShort.Builder builder() {
+        return new AutoValue_ComicIssueShort.Builder();
+    }
+
     public static TypeAdapter<ComicIssueShort> typeAdapter(Gson gson) {
         return new AutoValue_ComicIssueShort.GsonTypeAdapter(gson);
     }
 
-    public static Builder builder() {
-        return new AutoValue_ComicIssueShort.Builder();
-    }
+
 
     @AutoValue.Builder
     public abstract static class Builder {
 
-        public abstract Builder issueId(long issueId);
-        public abstract Builder issueName(String issueName);
-        public abstract Builder issueNumber(int issueNumber);
+        public abstract com.bohan.android.capstone.model.ComicIssueShort.Builder issueId(long issueId);
+        public abstract com.bohan.android.capstone.model.ComicIssueShort.Builder issueName(String issueName);
+        public abstract com.bohan.android.capstone.model.ComicIssueShort.Builder issueNumber(int issueNumber);
 
-        public abstract ComicIssueShort build();
+        public abstract com.bohan.android.capstone.model.ComicIssueShort build();
     }
 }

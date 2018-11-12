@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.CharacterList;
 
-import com.bohan.android.capstone.model.ComicCharacterList;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
 import java.util.List;

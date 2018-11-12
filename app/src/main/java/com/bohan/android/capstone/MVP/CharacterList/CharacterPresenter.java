@@ -2,9 +2,8 @@ package com.bohan.android.capstone.MVP.CharacterList;
 
 import android.os.Bundle;
 
-import com.bohan.android.capstone.ComicRemoteSource;
-import com.bohan.android.capstone.MVP.CharacterList.CharacterView;
-import com.bohan.android.capstone.model.ComicCharacterList;
+import com.bohan.android.capstone.model.data.ComicRemoteSource;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 

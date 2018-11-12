@@ -9,9 +9,9 @@ import android.content.SyncResult;
 import android.os.Bundle;
 
 import com.bohan.android.capstone.ComicPrefsHelper;
-import com.bohan.android.capstone.ComicRemoteSource;
-import com.bohan.android.capstone.ComicsLoverApp;
-import com.bohan.android.capstone.model.ComicLocalSource;
+import com.bohan.android.capstone.model.data.ComicRemoteSource;
+import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
+import com.bohan.android.capstone.model.data.ComicLocalSource;
 
 import java.util.Set;
 

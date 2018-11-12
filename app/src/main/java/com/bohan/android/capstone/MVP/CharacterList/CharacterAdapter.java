@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.Helper.Utils.ImageUtils;
-import com.bohan.android.capstone.model.ComicCharacterList;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicPublisherHelper;
 

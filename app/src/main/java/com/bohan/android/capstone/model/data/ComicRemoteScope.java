@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model;
+package com.bohan.android.capstone.model.data;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.VolumeDetails;
 
-import com.bohan.android.capstone.model.ComicVolume;
+import com.bohan.android.capstone.model.ComicModel.ComicVolume;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
 /**
