@@ -1,6 +1,15 @@
 package com.bohan.android.capstone.Utils;
 
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+
+import com.bohan.android.capstone.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 /**
  * Created by Bo Han.
@@ -13,12 +22,12 @@ public class ImageUtils {
      * @param view Target imageView
      * @param url Image url
      */
-    public static void loadImageWithTopCrop(ImageView view, String url) {
+    public static void imageWithCropOnTop(ImageView view, String imageUrl) {
 
         Glide.with(view.getContext())
-                .load(url)
+                .load(imageUrl)
                 .crossFade()
-                .transform(new GlideCustomCropTransformation(view.getContext(), 0, 0))
+                .transform(new GlideUtils(view.getContext(), 0, 0))
                 .error(R.drawable.placeholder_error)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(view);
@@ -31,12 +40,13 @@ public class ImageUtils {
      * @param url Image url
      * @param progressBar ProgressBar view which shown while image loading
      */
-    public static void loadImageWithProgress(ImageView view, String url, ProgressBar progressBar) {
+    public static void fetchingImageWithProgress(ProgressBar progressBar, ImageView view, String imageurl) {
 
         Glide.with(view.getContext())
-                .load(url)
+                .load(imageurl)
                 .crossFade()
                 .listener(new RequestListener<String, GlideDrawable>() {
+
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target,
                                                boolean isFirstResource) {
@@ -64,13 +74,13 @@ public class ImageUtils {
      * @param url Image url
      * @param callback Callback which runs when image loading finished with any result
      */
-    public static void loadImageWithCallback(ImageView view, String url,
-                                             ImageLoadingCallback callback) {
+    public static void imageWithCallback(ImageCallback callback, ImageView view, String imageUrl){
 
         Glide.with(view.getContext())
-                .load(url)
+                .load(imageUrl)
                 .crossFade()
                 .listener(new RequestListener<String, GlideDrawable>() {
+
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target,
                                                boolean isFirstResource) {
@@ -91,7 +101,7 @@ public class ImageUtils {
                 .into(view);
     }
 
-    interface ImageLoadingCallback {
+    interface ImageCallback {
 
         void onFinish(boolean successful);
     }

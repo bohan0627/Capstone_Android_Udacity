@@ -1,12 +1,15 @@
-package com.bohan.android.capstone.MVP;
+package com.bohan.android.capstone.MVP.CharacterList;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bohan.android.capstone.R;
+import com.bohan.android.capstone.Utils.ImageUtils;
 import com.bohan.android.capstone.model.ComicCharacterList;
 import com.bohan.android.capstone.model.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.model.ModelHelper.ComicPublisherHelper;
@@ -22,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Bo Han.
  */
-public class CharacterAdapter extends RecyclerView<CharacterViewHolder>{
+public class CharacterAdapter extends RecyclerView<CharacterViewHolder> {
     private List<ComicCharacterList> characterList;
     final OnVolumeClickListener listener;
 
@@ -46,7 +49,7 @@ public class CharacterAdapter extends RecyclerView<CharacterViewHolder>{
 
     @Override
     public int getItemCount() {
-        return characterList == null ? 0 : characters.size();
+        return characterList == null ? 0 : characterList.size();
     }
 
     List<ComicCharacterList> getCharacterList() {
@@ -77,7 +80,6 @@ public class CharacterAdapter extends RecyclerView<CharacterViewHolder>{
         CharacterViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
             itemView.setOnClickListener(this);
         }
 
@@ -85,24 +87,21 @@ public class CharacterAdapter extends RecyclerView<CharacterViewHolder>{
 
             currentCharacterId = character.characterId();
 
-            ComicImageHelper image = character.characterMainImage();
-            if (image != null) {
-                String url = image.small_url();
-                ImageUtils.loadImageWithProgress(characterPoster, url, progressBar);
-            } else {
+            ComicImageHelper mainImage = character.characterMainImage();
+            if (mainImage != null) {
+                String smallImageUrl = mainImage.imageSmallUrl();
+                ImageUtils.fetchingImageWithProgress(progressBar, characterPoster, smallImageUrl);
+            } else
                 imageLayout.setVisibility(View.GONE);
-            }
 
             characterName.setText(character.characterName());
-
             ComicPublisherHelper publisher = character.characterMainPublisher();
 
             if (publisher != null) {
                 String publisherName = String.format(Locale.US, publisherFormat, publisher.publisherName());
                 characterPublisher.setText(publisherName);
-            } else {
+            } else
                 characterPublisher.setVisibility(View.GONE);
-            }
         }
 
         @Override
@@ -112,8 +111,8 @@ public class CharacterAdapter extends RecyclerView<CharacterViewHolder>{
     }
 
     interface OnVolumeClickListener {
-
         void volumeClicked(long characterId);
     }
+
 }
 
