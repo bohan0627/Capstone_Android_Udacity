@@ -73,4 +73,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:3.8.0'
 
+    implementation 'com.android.support:preference-v7:27.1.1'
+
+    implementation 'com.hannesdorfmann.fragmentargs:annotation:4.0.0-RC1'
+    annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:4.0.0-RC1'
+
 }
