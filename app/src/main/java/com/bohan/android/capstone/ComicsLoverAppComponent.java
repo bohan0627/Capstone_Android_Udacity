@@ -9,7 +9,7 @@ import dagger.Component;
  */
 
 
-@Component(modules = {ComicsLoverAppModule.class, ComicPreferencesHelperModule.class})
+@Component(modules = {ComicsLoverAppModule.class, ComicPrefsHelperModule.class})
 @Singleton
 public class ComicsLoverAppComponent {
 }

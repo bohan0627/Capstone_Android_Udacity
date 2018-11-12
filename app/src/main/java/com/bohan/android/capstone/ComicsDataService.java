@@ -14,7 +14,7 @@ import com.bohan.android.capstone.model.ComicIssue;
 import com.bohan.android.capstone.model.ComicIssueList;
 import com.bohan.android.capstone.model.ComicVolume;
 import com.bohan.android.capstone.model.ComicVolumeList;
-import com.bohan.android.capstone.model.ModelHelper.ServerHelper;
+import com.bohan.android.capstone.Helper.ModelHelper.ServerHelper;
 
 /**
  * Created by Bo Han.

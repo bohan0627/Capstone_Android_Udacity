@@ -1,14 +1,14 @@
 package com.bohan.android.capstone;
 
-import com.bohan.android.capstone.Utils.AutoValueUtils;
-import com.bohan.android.capstone.Utils.RxUtils;
+import com.bohan.android.capstone.Helper.Utils.AutoValueUtils;
+import com.bohan.android.capstone.Helper.Utils.RxUtils;
 import com.bohan.android.capstone.model.ComicCharacter;
 import com.bohan.android.capstone.model.ComicCharacterList;
 import com.bohan.android.capstone.model.ComicIssue;
 import com.bohan.android.capstone.model.ComicIssueList;
 import com.bohan.android.capstone.model.ComicVolume;
 import com.bohan.android.capstone.model.ComicVolumeList;
-import com.bohan.android.capstone.model.ModelHelper.ServerHelper;
+import com.bohan.android.capstone.Helper.ModelHelper.ServerHelper;
 
 import java.util.HashMap;
 import java.util.List;

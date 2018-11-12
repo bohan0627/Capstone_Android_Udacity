@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.Utils;
+package com.bohan.android.capstone.Helper.Utils;
 
 import android.view.View;
 import android.widget.ImageView;

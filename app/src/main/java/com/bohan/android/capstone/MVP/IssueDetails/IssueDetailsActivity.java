@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.MVP;
+package com.bohan.android.capstone.MVP.IssueDetails;
 
 /**
  * Created by Bo Han.

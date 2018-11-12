@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.Utils;
+package com.bohan.android.capstone.Helper.Utils;
 
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

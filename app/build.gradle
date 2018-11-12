@@ -21,7 +21,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -77,5 +80,10 @@ dependencies {
 
     implementation 'com.hannesdorfmann.fragmentargs:annotation:4.0.0-RC1'
     annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:4.0.0-RC1'
+
+    implementation 'com.evernote:android-state:1.1.1'
+    annotationProcessor 'com.evernote:android-state-processor:1.1.1'
+
+    //implementation 'com.android.support:support-v13:27.1.1'
 
 }

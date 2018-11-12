@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.Utils;
+package com.bohan.android.capstone.Helper.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

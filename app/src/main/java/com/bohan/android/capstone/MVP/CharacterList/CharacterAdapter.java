@@ -9,10 +9,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bohan.android.capstone.R;
-import com.bohan.android.capstone.Utils.ImageUtils;
+import com.bohan.android.capstone.Helper.Utils.ImageUtils;
 import com.bohan.android.capstone.model.ComicCharacterList;
-import com.bohan.android.capstone.model.ModelHelper.ComicImageHelper;
-import com.bohan.android.capstone.model.ModelHelper.ComicPublisherHelper;
+import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
+import com.bohan.android.capstone.Helper.ModelHelper.ComicPublisherHelper;
 
 import java.util.ArrayList;
 import java.util.List;

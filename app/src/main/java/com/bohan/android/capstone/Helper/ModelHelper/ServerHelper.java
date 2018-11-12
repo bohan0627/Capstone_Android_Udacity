@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model.ModelHelper;
+package com.bohan.android.capstone.Helper.ModelHelper;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.reflect.TypeToken;

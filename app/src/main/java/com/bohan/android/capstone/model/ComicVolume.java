@@ -1,7 +1,7 @@
 package com.bohan.android.capstone.model;
 
-import com.bohan.android.capstone.model.ModelHelper.ComicImageHelper;
-import com.bohan.android.capstone.model.ModelHelper.ComicPublisherHelper;
+import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
+import com.bohan.android.capstone.Helper.ModelHelper.ComicPublisherHelper;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 

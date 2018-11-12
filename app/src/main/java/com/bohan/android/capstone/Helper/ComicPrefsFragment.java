@@ -1,4 +1,4 @@
-package com.bohan.android.capstone;
+package com.bohan.android.capstone.Helper;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.support.v7.app.ActionBar;
+
+import com.bohan.android.capstone.R;
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
 import butterknife.ButterKnife;
 import io.reactivex.annotations.Nullable;
