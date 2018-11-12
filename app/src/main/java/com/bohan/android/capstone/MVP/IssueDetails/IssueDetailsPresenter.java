@@ -41,7 +41,7 @@ public class IssueDetailsPresenter  extends MvpBasePresenter<IssueDetailsView> {
     }
 
     void bookmarkIssue(ComicIssueInfo issue) {
-        localSource.saveOwnedIssueToDb(ContentUtils.shortenIssueInfo(issue));
+        localSource.saveOwnedIssueToDb(ContentUtils.issueWithShortInfo(issue));
     }
 
     void removeBookmark(long issueId) {

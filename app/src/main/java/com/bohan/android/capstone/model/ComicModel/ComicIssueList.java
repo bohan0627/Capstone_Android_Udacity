@@ -41,7 +41,7 @@ public abstract class ComicIssueList {
 
         public abstract Builder issueId(long issueId);
         public abstract Builder issueMainImage(ComicImageHelper issueMainImage);
-        public abstract Builder iissueNumber(int issueNumber);
+        public abstract Builder issueNumber(int issueNumber);
         public abstract Builder issueName(String issueName);
         public abstract Builder issueFirstStoreDate(String issueFirstStoreDate);
         public abstract Builder issueCoverDate(String issueCoverDate);

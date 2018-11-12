@@ -83,6 +83,12 @@ dependencies {
 
     implementation 'com.evernote:android-state:1.1.1'
     annotationProcessor 'com.evernote:android-state-processor:1.1.1'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-crash:16.0.0'
+
+    implementation 'org.jsoup:jsoup:1.11.3'
+
+    implementation 'com.android.support:palette-v7:27.1.1'
 
     //implementation 'com.android.support:support-v13:27.1.1'
 
