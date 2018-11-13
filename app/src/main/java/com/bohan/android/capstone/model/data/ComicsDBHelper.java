@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
-import com.bohan.android.capstone.model.data.ComicContract.TrackedVolumeEntry;
+import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 /**
  * Created by Bo Han
  * This is for creating and updating the database and tables
@@ -50,18 +50,18 @@ public class ComicsDBHelper extends SQLiteOpenHelper {
                     IssueEntry.COLUMN_ISSUE_VOLUME_NAME + TEXT_TYPE + SEPARATOR +
                     " UNIQUE (" + IssueEntry.COLUMN_ISSUE_ID + ") ON CONFLICT REPLACE);";
 
-    private static final String SQL_CREATE_TRACKED_VOLUMES_TABLE =
-            "CREATE TABLE " + TrackedVolumeEntry.TABLE_NAME_TRACKED_VOLUMES + " (" +
-                    TrackedVolumeEntry._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT," +
-                    TrackedVolumeEntry.COLUMN_VOLUME_ID + LONG_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_NAME + TEXT_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_ISSUES_COUNT + INTEGER_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_PUBLISHER_NAME + TEXT_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_START_YEAR + TEXT_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE + TEXT_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_MEDIUM_IMAGE + TEXT_TYPE + SEPARATOR +
-                    TrackedVolumeEntry.COLUMN_VOLUME_HD_IMAGE + TEXT_TYPE + SEPARATOR +
-                    " UNIQUE (" + TrackedVolumeEntry.COLUMN_VOLUME_ID + ") ON CONFLICT REPLACE);";
+    private static final String SQL_CREATE_local_volumes_TABLE =
+            "CREATE TABLE " + LocalVolumeEntry.TABLE_NAME_LOCAL_VOLUMES + " (" +
+                    LocalVolumeEntry._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT," +
+                    LocalVolumeEntry.COLUMN_VOLUME_ID + LONG_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_NAME + TEXT_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_ISSUES_COUNT + INTEGER_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_PUBLISHER_NAME + TEXT_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_START_YEAR + TEXT_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE + TEXT_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_MEDIUM_IMAGE + TEXT_TYPE + SEPARATOR +
+                    LocalVolumeEntry.COLUMN_VOLUME_HD_IMAGE + TEXT_TYPE + SEPARATOR +
+                    " UNIQUE (" + LocalVolumeEntry.COLUMN_VOLUME_ID + ") ON CONFLICT REPLACE);";
 
 
     public ComicsDBHelper(Context context) {
@@ -72,12 +72,12 @@ public class ComicsDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TODAY_ISSUES_TABLE);
         db.execSQL(SQL_CREATE_OWNED_ISSUES_TABLE);
-        db.execSQL(SQL_CREATE_TRACKED_VOLUMES_TABLE);
+        db.execSQL(SQL_CREATE_local_volumes_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TrackedVolumeEntry.TABLE_NAME_TRACKED_VOLUMES);
+        db.execSQL("DROP TABLE IF EXISTS " + LocalVolumeEntry.TABLE_NAME_LOCAL_VOLUMES);
         db.execSQL("DROP TABLE IF EXISTS " + IssueEntry.TABLE_NAME_OWNED_ISSUES);
         db.execSQL("DROP TABLE IF EXISTS " + IssueEntry.TABLE_NAME_TODAY_ISSUES);
         onCreate(db);

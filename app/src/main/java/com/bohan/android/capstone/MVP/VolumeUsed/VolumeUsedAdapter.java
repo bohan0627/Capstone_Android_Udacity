@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bohan.android.capstone.Helper.Utils.ImageUtils;
 import com.bohan.android.capstone.R;
-import com.bohan.android.capstone.model.data.ComicContract.TrackedVolumeEntry;
+import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,9 +92,9 @@ public class VolumeUsedAdapter extends RecyclerView.Adapter<VolumeViewHolder> {
 
         public void bindTo(int position) {
 
-            int idIndex = cursor.getColumnIndexOrThrow(TrackedVolumeEntry.COLUMN_VOLUME_ID);
-            int coverIndex = cursor.getColumnIndexOrThrow(TrackedVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE);
-            int nameIndex = cursor.getColumnIndexOrThrow(TrackedVolumeEntry.COLUMN_VOLUME_NAME);
+            int idIndex = cursor.getColumnIndexOrThrow(LocalVolumeEntry.COLUMN_VOLUME_ID);
+            int coverIndex = cursor.getColumnIndexOrThrow(LocalVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE);
+            int nameIndex = cursor.getColumnIndexOrThrow(LocalVolumeEntry.COLUMN_VOLUME_NAME);
 
             Timber.d("Cursor size is " + cursor.getCount());
             Timber.d("Cursor: id index is " + idIndex);

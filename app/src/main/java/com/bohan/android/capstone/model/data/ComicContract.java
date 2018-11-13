@@ -14,7 +14,7 @@ public class ComicContract {
 
     static final String PATH_TODAY_ISSUES = "today_issues";
     static final String PATH_OWNED_ISSUES = "owned_issues";
-    static final String PATH_TRACKED_VOLUMES = "tracked_volumes";
+    static final String PATH_local_volumes = "local_volumes";
 
     public static final class IssueEntry implements BaseColumns {
 
@@ -41,13 +41,13 @@ public class ComicContract {
                 .build();
     }
 
-    public static final class TrackedVolumeEntry implements BaseColumns {
+    public static final class LocalVolumeEntry implements BaseColumns {
 
-        public static final Uri CONTENT_URI_TRACKED_VOLUMES = BASE_CONTENT_URI.buildUpon()
-                .appendPath(PATH_TRACKED_VOLUMES)
+        public static final Uri CONTENT_URI_local_volumes = BASE_CONTENT_URI.buildUpon()
+                .appendPath(PATH_local_volumes)
                 .build();
 
-        static final String TABLE_NAME_TRACKED_VOLUMES = "tracked_volumes";
+        static final String TABLE_NAME_LOCAL_VOLUMES = "local_volumes";
         public static final String COLUMN_VOLUME_ID = "volume_id";
         public static final String COLUMN_VOLUME_NAME = "volume_name";
         public static final String COLUMN_VOLUME_ISSUES_COUNT = "volume_issues_count";

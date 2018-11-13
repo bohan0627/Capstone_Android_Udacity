@@ -11,7 +11,7 @@ import com.bohan.android.capstone.model.ComicModel.ComicVolume;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeShort;
 import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
-import com.bohan.android.capstone.model.data.ComicContract.TrackedVolumeEntry;
+import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -69,14 +69,14 @@ public class ContentUtils {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_ID, volumeList.volumeId());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_NAME, volumeList.volumeName());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_ISSUES_COUNT, volumeList.volumeIssuesCount());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_PUBLISHER_NAME, volumeList.mainPublisher().publisherName());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_START_YEAR, volumeList.volumeStartYear());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE, volumeList.volumeMainImage().imageSmallUrl());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_MEDIUM_IMAGE, volumeList.volumeMainImage().imageMediumUrl());
-        contentValues.put(TrackedVolumeEntry.COLUMN_VOLUME_HD_IMAGE, volumeList.volumeMainImage().imageSuperUrl());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_ID, volumeList.volumeId());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_NAME, volumeList.volumeName());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_ISSUES_COUNT, volumeList.volumeIssuesCount());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_PUBLISHER_NAME, volumeList.mainPublisher().publisherName());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_START_YEAR, volumeList.volumeStartYear());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_SMALL_IMAGE, volumeList.volumeMainImage().imageSmallUrl());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_MEDIUM_IMAGE, volumeList.volumeMainImage().imageMediumUrl());
+        contentValues.put(LocalVolumeEntry.COLUMN_VOLUME_HD_IMAGE, volumeList.volumeMainImage().imageSuperUrl());
 
         return contentValues;
     }

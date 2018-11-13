@@ -4,33 +4,34 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.bohan.android.capstone.Helper.Utils.ContentUtils;
-import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
-import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
-import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
-import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
-
-import java.util.List;
-import java.util.Set;
-
 import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 
+import com.bohan.android.capstone.Helper.Utils.ContentUtils;
+import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
+import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
+import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
+import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
+
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by Bo Han.
- * This is for fetching data from local
  */
-public class ComicLocalSource {
+public class ComicLocalSourceHelper {
+
     private final ContentResolver contentResolver;
 
     @Inject
-    public ComicLocalSource(ContentResolver contentResolver) {
+    public ComicLocalSourceHelper(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
 
     public void issuesTodayToDB(@NonNull List<ComicIssueList> issueList) {
+
         for (ComicIssueList issue : issueList) {
             contentResolver.insert(IssueEntry.CONTENT_URI_TODAY_ISSUES,
                     ContentUtils.contentValuesFromIssue(issue));
@@ -38,9 +39,10 @@ public class ComicLocalSource {
     }
 
     public Single<List<ComicIssueList>> issuesTodayFromDB() {
-
-        return Single.create(e -> { Cursor cursor = contentResolver
+        return Single.create(e -> {
+            Cursor cursor = contentResolver
                     .query(IssueEntry.CONTENT_URI_TODAY_ISSUES, null, null, null, null);
+
             if (cursor != null) {
                 List<ComicIssueList> list = ContentUtils.issuesFromCursor(cursor);
                 cursor.close();
@@ -48,9 +50,9 @@ public class ComicLocalSource {
             } });
     }
 
-    public Single<List<ComicIssueList>> localIssueFromDB() {
-
-        return Single.create(e -> { Cursor cursor = contentResolver
+    public Single<List<ComicIssueList>> issuesLocalFromDB() {
+        return Single.create(e -> {
+            Cursor cursor = contentResolver
                     .query(IssueEntry.CONTENT_URI_OWNED_ISSUES,
                             null,
                             null,
@@ -67,10 +69,38 @@ public class ComicLocalSource {
         contentResolver.delete(IssueEntry.CONTENT_URI_TODAY_ISSUES, null, null);
     }
 
+    public boolean isIssueMarked(long issueId) {
+        boolean marked = false;
+        Cursor cursor = contentResolver.query(
+                IssueEntry.CONTENT_URI_OWNED_ISSUES,
+                null,
+                IssueEntry.COLUMN_ISSUE_ID + " = ?",
+                new String[]{String.valueOf(issueId)},
+                null);
+        if (cursor != null) {
+            marked = cursor.getCount() > 0;
+            cursor.close();
+        }
+        return marked;
+    }
 
-    public Set<Long> volumesIdsTodayFromDB() {
+    public void issueTodayToDB(@NonNull ComicIssueList issueList) {
+        contentResolver.insert(
+                IssueEntry.CONTENT_URI_OWNED_ISSUES,
+                ContentUtils.contentValuesFromIssue(issueList));
+    }
+
+    public void deleteLocalIssueFromDB(long issueId) {
+        Uri deletionUri = ContentUtils
+                .detailsUri(IssueEntry.CONTENT_URI_OWNED_ISSUES, issueId);
+        contentResolver.delete(deletionUri, null, null);
+    }
+
+    public Set<Long> volumeIdsTodayFromDB() {
         Set<Long> volumeIds = null;
-        Cursor cursor = contentResolver.query(IssueEntry.CONTENT_URI_TODAY_ISSUES,
+
+        Cursor cursor = contentResolver.query(
+                IssueEntry.CONTENT_URI_TODAY_ISSUES,
                 new String[]{IssueEntry.COLUMN_ISSUE_VOLUME_ID},
                 null,
                 null,
@@ -80,13 +110,14 @@ public class ComicLocalSource {
             volumeIds = ContentUtils.idsFromCursor(cursor);
             cursor.close();
         }
-
         return volumeIds;
     }
 
     public Set<Long> localVolumeIdsFromDB() {
         Set<Long> volumeIds = null;
-        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_local_volumes,
+
+        Cursor cursor = contentResolver.query(
+                LocalVolumeEntry.CONTENT_URI_local_volumes,
                 new String[]{LocalVolumeEntry.COLUMN_VOLUME_ID},
                 null,
                 null,
@@ -100,10 +131,12 @@ public class ComicLocalSource {
         return volumeIds;
     }
 
-    public String localVolumeById(long volumeId) {
+    public String localVolumeNameById(long volumeId) {
 
         String volumeName = "";
-        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_local_volumes,
+
+        Cursor cursor = contentResolver.query(
+                LocalVolumeEntry.CONTENT_URI_local_volumes,
                 new String[]{LocalVolumeEntry.COLUMN_VOLUME_NAME},
                 LocalVolumeEntry.COLUMN_VOLUME_ID + " = ?",
                 new String[]{String.valueOf(volumeId)},
@@ -117,46 +150,20 @@ public class ComicLocalSource {
         return volumeName;
     }
 
-    public boolean isIssueMarked(long issueId) {
-
-        boolean marked = false;
-        Cursor cursor = contentResolver.query(IssueEntry.CONTENT_URI_OWNED_ISSUES,
-                null,
-                IssueEntry.COLUMN_ISSUE_ID + " = ?",
-                new String[]{String.valueOf(issueId)},
-                null);
-        if (cursor != null) {
-            marked = cursor.getCount() > 0;
-            cursor.close();
-        }
-
-        return marked;
-    }
-
-    public boolean isVolumeLocaled(long volumeId) {
-        boolean localed = false;
-        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_local_volumes,
+    public boolean isVolumeLocal(long volumeId) {
+        boolean local = false;
+        Cursor cursor = contentResolver.query(
+                LocalVolumeEntry.CONTENT_URI_local_volumes,
                 null,
                 LocalVolumeEntry.COLUMN_VOLUME_ID + " = ?",
                 new String[]{String.valueOf(volumeId)},
                 null);
 
         if (cursor != null) {
-            localed = cursor.getCount() > 0;
+            local = cursor.getCount() > 0;
             cursor.close();
         }
-        return localed;
-    }
-
-    public void localIssueToDB(@NonNull ComicIssueList issueList) {
-        contentResolver.insert(IssueEntry.CONTENT_URI_OWNED_ISSUES,
-                ContentUtils.contentValuesFromIssue(issueList));
-    }
-
-    public void deleteLocalIssueFromDB(long issueId) {
-        Uri deletionUri = ContentUtils
-                .detailsUri(IssueEntry.CONTENT_URI_OWNED_ISSUES, issueId);
-        contentResolver.delete(deletionUri, null, null);
+        return local;
     }
 
     public void localVolumeToDB(@NonNull ComicVolumeList volumeList) {
@@ -166,9 +173,8 @@ public class ComicLocalSource {
     }
 
     public void deleteLocalVolumeFromDB(long volumeId) {
-        Uri deletionUri = ContentUtils
+        Uri deletion = ContentUtils
                 .detailsUri(LocalVolumeEntry.CONTENT_URI_local_volumes, volumeId);
-        contentResolver.delete(deletionUri, null, null);
+        contentResolver.delete(deletion, null, null);
     }
 }
-

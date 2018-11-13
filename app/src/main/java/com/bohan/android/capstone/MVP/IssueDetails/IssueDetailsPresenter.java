@@ -1,5 +1,6 @@
 package com.bohan.android.capstone.MVP.IssueDetails;
 
+import com.bohan.android.capstone.Helper.Utils.ContentUtils;
 import com.bohan.android.capstone.model.data.ComicRemoteSource;
 import com.bohan.android.capstone.model.ComicModel.ComicIssue;
 import com.bohan.android.capstone.model.data.ComicLocalSource;
@@ -37,20 +38,19 @@ public class IssueDetailsPresenter  extends MvpBasePresenter<IssueDetailsView> {
     }
 
     boolean isCurrentIssueBookmarked(long issueId) {
-        return localSource.isIssueBookmarked(issueId);
+        return localSource.isIssueMarked(issueId);
     }
 
-    void bookmarkIssue(ComicIssueInfo issue) {
-        localSource.saveOwnedIssueToDb(ContentUtils.issueWithShortInfo(issue));
+    void addBookmarkIssue(ComicIssue issue) {
+        localSource.localIssueToDB(ContentUtils.issueWithShortInfo(issue));
     }
 
-    void removeBookmark(long issueId) {
-        localSource.removeOwnedIssueFromDb(issueId);
+    void removeBookmarkIssue(long issueId) {
+        localSource.deleteLocalIssueFromDB(issueId);
     }
 
     void fetchIssueDetails(long issueId) {
-        remoteSource.issueDetailsByIssueId(issueId)
-                .subscribe(getIssueDetailsObserver());
+        remoteSource.issueDetailsByIssueId(issueId).subscribe(getIssueDetailsObserver());
     }
 
     private SingleObserver<ComicIssue> getIssueDetailsObserver() {

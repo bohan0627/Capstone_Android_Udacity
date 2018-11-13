@@ -2,6 +2,7 @@ package com.bohan.android.capstone.MVP.IssuelocalAsset;
 
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
 import com.bohan.android.capstone.model.data.ComicLocalSource;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import java.util.List;
 
@@ -15,8 +16,10 @@ import timber.log.Timber;
 
 /**
  * Created by Bo Han.
+ * This is for the Local owned issue
  */
-public class IssueLocalPresenter extends MvpBasePresenter<IssuelocalView> {
+@SuppressWarnings("deprecation")
+public class IssueLocalPresenter extends MvpBasePresenter<IssueLocalView> {
 
     private final ComicLocalSource localSource;
 
@@ -25,18 +28,17 @@ public class IssueLocalPresenter extends MvpBasePresenter<IssuelocalView> {
         this.localSource = localSource;
     }
 
-    void loadOwnedIssues() {
+    void fetchLocalIssue() {
         localSource
-                .getOwnedIssuesFromDb()
+                .localIssueFromDB()
                 .subscribe(getObserver());
     }
 
-    void loadOwnedIssuesFilteredByName(String name) {
-        localSource
-                .getOwnedIssuesFromDb()
+    void fetchLocalIssueByName(String issueName) {
+        localSource.localIssueFromDB()
                 .flatMapObservable(Observable::fromIterable)
                 .filter(issue -> issue.volume() != null)
-                .filter(issue -> issue.volume().name().contains(name))
+                .filter(issue -> issue.volume().volumeName().contains(issueName))
                 .toList()
                 .subscribe(getObserver());
     }
@@ -46,37 +48,33 @@ public class IssueLocalPresenter extends MvpBasePresenter<IssuelocalView> {
         return new SingleObserver<List<ComicIssueList>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                getView().showEmptyView(false);
+                getView().displayEmptyView(false);
                 getView().showLoading(true);
             }
 
             @Override
             public void onSuccess(@NonNull List<ComicIssueList> list) {
-
                 if (isViewAttached()) {
                     if (list.size() > 0) {
-                        // Display content
-                        Timber.d("Displaying content...");
+                        Timber.d("Showing data...");
                         getView().setData(list);
                         getView().showContent();
                     } else {
-                        // Display empty view
-                        Timber.d("Displaying empty view...");
+                        Timber.d("Showing empty view...");
                         getView().showLoading(false);
-                        getView().showEmptyView(true);
+                        getView().displayEmptyView(true);
                     }
                 }
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Timber.d("Data loading error: " + e.getMessage());
+                Timber.d("Error occured when fetching data: " + e.getMessage());
                 if (isViewAttached()) {
-                    Timber.d("Displaying error view...");
+                    Timber.d("Showing error view...");
                     getView().showError(e, false);
                 }
-            }
-        };
+            }};
     }
 }
 
