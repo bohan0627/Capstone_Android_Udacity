@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
+import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 
 import com.bohan.android.capstone.Helper.ModelHelper.ComicFragment;
 import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
@@ -31,6 +32,7 @@ import io.reactivex.annotations.Nullable;
  */
 
 @FragmentWithArgs
+@SuppressWarnings("deprecation")
 public class VolumeUsedFragment extends ComicFragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -60,7 +62,7 @@ public class VolumeUsedFragment extends ComicFragment
                 Fragment fragment = new VolumeDetailsFragmentBuilder(volumeId).build();
 
                 ViewUtils.replaceFragment(
-                        manager, fragment, R.id.content_frame, "VolumeDetailsFragment", true);
+                        manager, fragment,"VolumeDetailsFragment",  R.id.content_frame, true);
             } else {
                 startActivity(VolumeDetailsActivity.prepareIntent(getContext(), volumeId));
             }
@@ -121,7 +123,7 @@ public class VolumeUsedFragment extends ComicFragment
             @Override
             public Cursor loadInBackground() {
                 return getActivity().getContentResolver()
-                        .query(TrackedVolumeEntry.CONTENT_URI_TRACKED_VOLUMES,
+                        .query(LocalVolumeEntry.CONTENT_URI_LOCAL_VOLUMES,
                                 null, null, null, null);
             }
 

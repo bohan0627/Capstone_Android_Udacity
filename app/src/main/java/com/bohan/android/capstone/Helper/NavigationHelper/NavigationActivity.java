@@ -11,10 +11,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
+
+import com.google.firebase.analytics.FirebaseAnalytics.Event;
+import com.google.firebase.analytics.FirebaseAnalytics.Param;
 
 import com.bohan.android.capstone.Helper.ModelHelper.ComicMvpActivity;
 import com.bohan.android.capstone.Helper.SyncHelper.SyncManager;
+import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.Prefs.ComicPrefsHelper;
 import com.evernote.android.state.State;
@@ -48,7 +52,7 @@ public class NavigationActivity extends
     boolean isTabletLayout;
 
     @State
-    @AppNavigation.Section
+    @ComicAppNavigation.Section
     int currentSection;
 
     @Inject
@@ -113,17 +117,17 @@ public class NavigationActivity extends
     public void chooseItem(int chosenMenuItem) {
 
         if (chosenMenuItem == R.id.nav_issues) {
-            currentSection = AppNavigation.ISSUES;
+            currentSection = ComicAppNavigation.ISSUES;
         } else if (chosenMenuItem == R.id.nav_volumes) {
-            currentSection = AppNavigation.VOLUMES;
+            currentSection = ComicAppNavigation.VOLUMES;
         } else if (chosenMenuItem == R.id.nav_characters) {
-            currentSection = AppNavigation.CHARACTERS;
+            currentSection = ComicAppNavigation.CHARACTERS;
         } else if (chosenMenuItem == R.id.nav_collection) {
-            currentSection = AppNavigation.COLLECTION;
+            currentSection = ComicAppNavigation.COLLECTION;
         } else if (chosenMenuItem == R.id.nav_tracker) {
-            currentSection = AppNavigation.TRACKER;
+            currentSection = ComicAppNavigation.TRACKER;
         } else if (chosenMenuItem == R.id.nav_settings) {
-            currentSection = AppNavigation.SETTINGS;
+            currentSection = ComicAppNavigation.SETTINGS;
         }
 
         navigateToCurrentSection();
@@ -136,16 +140,16 @@ public class NavigationActivity extends
 
         FragmentManager manager = getSupportFragmentManager();
 
-        Fragment fragment = NavigationFragmentsFactory.getFragment(manager, currentSection);
+        Fragment fragment = FragmentsNavigationFactory.getFragment(manager, currentSection);
 
-        FragmentUtils.replaceFragmentIn(
-                manager, fragment, R.id.content_frame,
-                NavigationFragmentsFactory.getFragmentTag(currentSection), false);
+        ViewUtils.replaceFragment(
+                manager, fragment,FragmentsNavigationFactory.getFragmentTag(currentSection), R.id.content_frame,
+                false);
 
         restoreAppBarState();
     }
 
-    private void logChosenNavigationSection(@AppNavigation.Section int section) {
+    private void logChosenNavigationSection(@ComicAppNavigation.Section int section) {
 
         Bundle bundle = new Bundle();
         bundle.putInt(Param.ITEM_ID, section);
@@ -153,27 +157,27 @@ public class NavigationActivity extends
         firebaseAnalytics.logEvent(Event.SELECT_CONTENT, bundle);
     }
 
-    private String getChosenSectionName(@AppNavigation.Section int section) {
+    private String getChosenSectionName(@ComicAppNavigation.Section int section) {
 
         String chosenSection;
 
         switch (section) {
-            case AppNavigation.ISSUES:
+            case ComicAppNavigation.ISSUES:
                 chosenSection = "issues";
                 break;
-            case AppNavigation.VOLUMES:
+            case ComicAppNavigation.VOLUMES:
                 chosenSection = "volumes";
                 break;
-            case AppNavigation.CHARACTERS:
+            case ComicAppNavigation.CHARACTERS:
                 chosenSection = "characters";
                 break;
-            case AppNavigation.COLLECTION:
+            case ComicAppNavigation.COLLECTION:
                 chosenSection = "collection";
                 break;
-            case AppNavigation.TRACKER:
+            case ComicAppNavigation.TRACKER:
                 chosenSection = "tracker";
                 break;
-            case AppNavigation.SETTINGS:
+            case ComicAppNavigation.SETTINGS:
                 chosenSection = "settings";
                 break;
             default:

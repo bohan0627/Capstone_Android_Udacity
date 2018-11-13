@@ -106,7 +106,7 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
                 Fragment fragment = new CharacterDetailsFragmentBuilder(id).build();
 
                ViewUtils.replaceFragment(
-                        manager, fragment, R.id.content_frame, "CharacterDetailsFragment", true);
+                        manager, fragment, "CharacterDetailsFragment",R.id.content_frame,  true);
             } else {
                 startActivity(CharacterDetailsActivity.prepareIntent(getContext(), id));
             }
@@ -133,7 +133,7 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_bookmark:
-                onBookmarkClick();
+                onClickBookmark();
                 break;
         }
 
@@ -155,7 +155,7 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
     @NonNull
     @Override
     public IssueDetailsPresenter createPresenter() {
-        return issueDetailsComponent.presenter();
+        return issueDetailsComponent.issueDetailsPresenter();
     }
 
     @Override

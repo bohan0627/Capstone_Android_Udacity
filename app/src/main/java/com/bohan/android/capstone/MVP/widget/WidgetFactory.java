@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.os.Binder;
 import android.widget.RemoteViews;
 
+import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.model.data.ComicContract;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.R;
@@ -102,7 +104,7 @@ public class WidgetFactory implements RemoteViewsFactory {
         String volume = cursor.getString(INDEX_VOLUME_NAME);
         int issueNumber = cursor.getInt(INDEX_ISSUE_NUMBER);
 
-        String issueName = IssueTextUtils.getFormattedIssueTitle(volume, issueNumber);
+        String issueName = TextUtils.issueTitleFromVolume(volume, issueNumber);
 
         views.setTextViewText(R.id.widget_issue_name, issueName);
 
@@ -114,7 +116,7 @@ public class WidgetFactory implements RemoteViewsFactory {
 
     @Override
     public RemoteViews getLoadingView() {
-        return new RemoteViews(context.getPackageName(), R.layout.today_issues_widget_list_item);
+        return new RemoteViews(context.getPackageName(), R.layout.widget_issues_list_item_today);
     }
 
     @Override

@@ -87,7 +87,7 @@ public class CharacterListFragment extends
                 Fragment fragment = new CharacterDetailsFragmentBuilder(characterId).build();
 
                 ViewUtils.replaceFragment(
-                        manager, fragment, R.id.content_frame, "CharacterDetailsFragment", true);
+                        manager, fragment,"CharacterDetailsFragment",  R.id.content_frame, true);
             } else {
                 startActivity(CharacterDetailsActivity.prepareIntent(getContext(), characterId));
             }

@@ -221,7 +221,7 @@ public class IssueLocalFragment extends
 
     @Override
     public void setData(List<ComicIssueList> data) {
-        localAdapter.setissueList(data);
+        localAdapter.setIssueList(data);
         localAdapter.notifyDataSetChanged();
     }
 

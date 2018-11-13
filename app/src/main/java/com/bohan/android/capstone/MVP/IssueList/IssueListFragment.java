@@ -19,11 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.bohan.android.capstone.Helper.ModelHelper.ComicLceFragment;
 import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
 import com.bohan.android.capstone.Helper.SyncHelper.SyncAdapter;
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.Helper.Utils.ToolbarTargetUtils;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsActivity;
@@ -118,7 +119,7 @@ public class IssueListFragment extends
                 Fragment fragment = new IssueDetailsFragmentBuilder(issueId).build();
 
                 ViewUtils.replaceFragment(
-                        manager, fragment, R.id.content_frame, "IssueDetailsFragment", true);
+                        manager, fragment, "IssueDetailsFragment", R.id.content_frame, true);
             } else {
                 startActivity(IssueDetailsActivity.prepareIntent(getContext(), issueId));
             }
@@ -159,7 +160,7 @@ public class IssueListFragment extends
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_issues_list, menu);
+        inflater.inflate(R.menu.fragment_issue_list, menu);
 
         currentMenu = menu;
 
@@ -261,7 +262,7 @@ public class IssueListFragment extends
     }
 
     @Override
-    public void showEmptyView(boolean show) {
+    public void displayEmptyView(boolean show) {
         refreshLayout.setRefreshing(false);
         if (show) {
             emptyView.setText(emptyViewText);
@@ -274,7 +275,7 @@ public class IssueListFragment extends
     }
 
     @Override
-    public void showErrorToast(String message) {
+    public void displayErrorMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
@@ -302,7 +303,7 @@ public class IssueListFragment extends
     }
 
     @Override
-    public void choseDateAndLoadData() {
+    public void fetchIssueByDate() {
         Calendar now = Calendar.getInstance();
         DatePickerDialog dpd = DatePickerDialog.newInstance(
                 (view, year, monthOfYear, dayOfMonth) -> {
@@ -318,13 +319,13 @@ public class IssueListFragment extends
     }
 
     @Override
-    public void loadDataForChosenDate(String date) {
+    public void fetchIssueByDate(String date) {
         presenter.loadIssuesByDate(date);
     }
 
     @Override
-    public void loadDataFiltered(String filter) {
-        String date = (isNotNullOrEmpty(chosenDate)) ? chosenDate : DateTextUtils.getTodayDateString();
+    public void fetchIssueByFilters(String filter) {
+        String date = (isNotNullOrEmpty(chosenDate)) ? chosenDate : TextUtils.dateStringForToday();
         presenter.loadIssuesByDateAndName(date, filter);
     }
 
@@ -366,7 +367,7 @@ public class IssueListFragment extends
 
                 if (searchQuery.length() > 0) {
                     showClearQueryMenuItem(true);
-                    loadDataFiltered(searchQuery);
+                    fetchIssueByFilters(searchQuery);
                 }
                 return false;
             }

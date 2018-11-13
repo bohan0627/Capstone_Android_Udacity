@@ -3,6 +3,13 @@ package com.bohan.android.capstone.Helper.NavigationHelper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.bohan.android.capstone.Helper.ComicPrefsFragment;
+import com.bohan.android.capstone.MVP.CharacterList.CharacterListFragment;
+import com.bohan.android.capstone.MVP.IssueList.IssueListFragment;
+import com.bohan.android.capstone.MVP.IssuelocalAsset.IssueLocalFragment;
+import com.bohan.android.capstone.MVP.VolumeList.VolumeListFragment;
+import com.bohan.android.capstone.MVP.VolumeUsed.VolumeUsedFragment;
+
 /**
  * Created by Bo Han.
  */
@@ -17,15 +24,15 @@ public class FragmentsNavigationFactory {
 
         switch (type) {
             case ComicAppNavigation.ISSUES:
-                return new IssuesFragmentBuilder().build();
+                return new IssueListFragmentBuilder().build();
             case ComicAppNavigation.VOLUMES:
-                return new VolumesFragmentBuilder().build();
+                return new VolumeListFragmentBuilder().build();
             case ComicAppNavigation.CHARACTERS:
-                return new CharactersFragmentBuilder().build();
+                return new CharacterListFragmentBuilder().build();
             case ComicAppNavigation.COLLECTION:
-                return new OwnedIssuesFragmentBuilder().build();
+                return new IssueLocalFragmentBuilder().build();
             case ComicAppNavigation.TRACKER:
-                return new VolumesTrackerFragmentBuilder().build();
+                return new VolumeUsedFragmentBuilder().build();
             case ComicAppNavigation.SETTINGS:
                 return new ComicPrefsFragmentBuilder().build();
             default:
@@ -33,20 +40,20 @@ public class FragmentsNavigationFactory {
         }
     }
 
-    public static String getFragmentTag(@AppNavigation.Section int type) {
+    public static String getFragmentTag(@ComicAppNavigation.Section int type) {
         switch (type) {
             case ComicAppNavigation.ISSUES:
-                return IssuesFragment.class.getSimpleName();
+                return IssueListFragment.class.getSimpleName();
             case ComicAppNavigation.VOLUMES:
-                return VolumesFragment.class.getSimpleName();
+                return VolumeListFragment.class.getSimpleName();
             case ComicAppNavigation.CHARACTERS:
-                return CharactersFragment.class.getSimpleName();
+                return CharacterListFragment.class.getSimpleName();
             case ComicAppNavigation.COLLECTION:
-                return OwnedIssuesFragment.class.getSimpleName();
+                return IssueLocalFragment.class.getSimpleName();
             case ComicAppNavigation.TRACKER:
-                return VolumesTrackerFragment.class.getSimpleName();
+                return VolumeUsedFragment.class.getSimpleName();
             case ComicAppNavigation.SETTINGS:
-                return ComicPreferencesFragment.class.getSimpleName();
+                return ComicPrefsFragment.class.getSimpleName();
             default:
                 return "";
         }

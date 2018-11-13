@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/today_issues_widget"
+    android:initialLayout="@layout/widget_issues_today"
     android:minHeight="@dimen/widget_default_height"
     android:minResizeHeight="@dimen/widget_default_resize_height"
     android:minResizeWidth="@dimen/widget_default_resize_width"

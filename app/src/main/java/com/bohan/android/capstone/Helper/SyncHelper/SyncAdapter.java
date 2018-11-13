@@ -8,9 +8,14 @@ import android.content.Intent;
 import android.content.SyncResult;
 import android.os.Bundle;
 
+import com.bohan.android.capstone.Helper.Utils.NetworkUtils;
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.model.Prefs.ComicPrefsHelper;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.data.Local.ComicLocalSource;
+import com.bohan.android.capstone.model.data.Local.ComicLocalSourceModule;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceHelper;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceModule;
 
 import java.util.Set;
 
@@ -28,7 +33,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             "com.bohan.comicslover.ACTION_DATA_UPDATED";
 
     @Inject
-    ComicRemoteSource remoteSource;
+    ComicRemoteSourceHelper remoteSource;
     @Inject
     ComicLocalSource localSource;
 
@@ -37,13 +42,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 
 
-    ComicSyncAdapter(Context context) {
+    SyncAdapter(Context context) {
         super(context, true);
 
         ComicsLoverApp
                 .getAppComponent()
-                .plusRemoteComponent(new ComicRemoteDataModule())
-                .plusLocalComponent(new ComicLocalDataModule())
+                .plusRemoteComponent(new ComicRemoteSourceModule())
+                .plusLocalComponent(new ComicLocalSourceModule())
                 .inject(this);
     }
 
@@ -53,15 +58,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         Timber.d("Scheduled sync started...");
 
-        String date = DateTextUtils.getTodayDateString();
+        String date = TextUtils.dateStringForToday();
 
-        remoteDataHelper
+        remoteSource
                 .getIssuesListByDate(date)
                 .subscribe(
                         // onSuccess
                         list -> {
-                            localSource.removeAllTodayIssuesFromDb();
-                            localSource.saveTodayIssuesToDb(list);
+                            localSource.deleteIssuesTodayFromDB();
+                            localSource.issuesTodayToDB(list);
                             prefsHelper.setLastSyncDate(date);
                             prefsHelper.clearDisplayedVolumesIdList();
                             sendDataUpdatedBroadcast();
@@ -76,8 +81,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private void checkForTrackedVolumesUpdates() {
 
-        Set<Long> trackedVolumes = localSource.getTrackedVolumesIdsFromDb();
-        Set<Long> todayVolumes = localSource.getTodayVolumesIdsFromDb();
+        Set<Long> trackedVolumes = localSource.localVolumeIdsFromDB();
+        Set<Long> todayVolumes = localSource.volumesIdsTodayFromDB();
         Set<String> alreadyDisplayedVolumes = prefsHelper.getDisplayedVolumesIdList();
 
         StringBuilder notificationText = new StringBuilder();
@@ -91,7 +96,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 }
 
                 // Add volume name to notification
-                String volumeName = localSource.getTrackedVolumeNameById(trackedVolumeId);
+                String volumeName = localSource.localVolumeById(trackedVolumeId);
                 notificationText.append(volumeName);
                 notificationText.append(", ");
 
@@ -102,7 +107,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         // If notification text is not empty, display it
         if (notificationText.length() > 0) {
-            NotificationUtils.updateNotification(
+            NetworkUtils.updateNotification(
                     getContext(),
                     notificationText.deleteCharAt(notificationText.length() - 2).toString());
         }

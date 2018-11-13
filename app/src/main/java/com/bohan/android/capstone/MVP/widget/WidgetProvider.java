@@ -1,5 +1,6 @@
 package com.bohan.android.capstone.MVP.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -7,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
+import com.bohan.android.capstone.Helper.SyncHelper.SyncAdapter;
+import com.bohan.android.capstone.Helper.SyncHelper.SyncManager;
 import com.bohan.android.capstone.R;
 
 /**
@@ -21,7 +25,7 @@ public class WidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         // Handle data updated broadcast
-        if (ComicSyncAdapter.ACTION_DATA_UPDATED.equals(intent.getAction())) {
+        if (SyncAdapter.ACTION_DATA_UPDATED.equals(intent.getAction())) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
@@ -32,7 +36,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         // Run forced sync when refresh button clicked
         if (ACTION_CLICK_REFRESH_BUTTON.equals(intent.getAction())) {
-            ComicSyncManager.syncImmediately();
+            SyncManager.syncImmediately();
         }
     }
 
@@ -44,7 +48,7 @@ public class WidgetProvider extends AppWidgetProvider {
             views.setEmptyView(R.id.widget_list, R.id.widget_empty);
 
             // Set intent to refresh button
-            Intent refreshIntent = new Intent(context, ComicWidgetProvider.class);
+            Intent refreshIntent = new Intent(context, WidgetProvider.class);
             refreshIntent.setAction(ACTION_CLICK_REFRESH_BUTTON);
             PendingIntent refreshPendingIntent = PendingIntent.getBroadcast(context, 0, refreshIntent, 0);
             views.setOnClickPendingIntent(R.id.widget_refresh_button, refreshPendingIntent);

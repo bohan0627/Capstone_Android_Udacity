@@ -103,7 +103,7 @@ public class ComicLocalSource {
     public String localVolumeById(long volumeId) {
 
         String volumeName = "";
-        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_local_volumes,
+        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_LOCAL_VOLUMES,
                 new String[]{LocalVolumeEntry.COLUMN_VOLUME_NAME},
                 LocalVolumeEntry.COLUMN_VOLUME_ID + " = ?",
                 new String[]{String.valueOf(volumeId)},
@@ -161,13 +161,13 @@ public class ComicLocalSource {
 
     public void localVolumeToDB(@NonNull ComicVolumeList volumeList) {
         contentResolver.insert(
-                LocalVolumeEntry.CONTENT_URI_local_volumes,
+                LocalVolumeEntry.CONTENT_URI_LOCAL_VOLUMES,
                 ContentUtils.contentValuesFromVolume(volumeList));
     }
 
     public void deleteLocalVolumeFromDB(long volumeId) {
         Uri deletionUri = ContentUtils
-                .detailsUri(LocalVolumeEntry.CONTENT_URI_local_volumes, volumeId);
+                .detailsUri(LocalVolumeEntry.CONTENT_URI_LOCAL_VOLUMES, volumeId);
         contentResolver.delete(deletionUri, null, null);
     }
 }

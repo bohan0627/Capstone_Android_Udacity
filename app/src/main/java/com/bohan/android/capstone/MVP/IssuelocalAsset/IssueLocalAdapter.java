@@ -54,14 +54,14 @@ class IssueLocalAdapter extends RecyclerView.Adapter<IssueLocalViewHolder> {
 
     @Override
     public long getItemId(int position) {
-        return issueList.get(position).id();
+        return issueList.get(position).issueId();
     }
 
     public List<ComicIssueList> getIssueList() {
         return issueList;
     }
 
-    public void setissueList(List<ComicIssueList> issueList) {
+    public void setIssueList(List<ComicIssueList> issueList) {
         this.issueList = issueList;
     }
 

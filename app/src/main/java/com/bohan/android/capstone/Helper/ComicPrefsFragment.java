@@ -2,7 +2,10 @@ package com.bohan.android.capstone.Helper;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.ListPreference;
+
 import android.view.View;
 import android.widget.Toolbar;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -10,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.support.v7.app.ActionBar;
 
+import com.bohan.android.capstone.Helper.SyncHelper.SyncManager;
 import com.bohan.android.capstone.R;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
@@ -62,7 +66,7 @@ public class ComicPrefsFragment extends PreferenceFragmentCompat
         String value = getPreferenceScreen().getSharedPreferences().getString(preference.getKey(), "");
         setPreferenceSummary(preference, value);
         int hours = Integer.parseInt(value);
-        ComicSyncManager.updateSyncPeriod(getContext(), hours);
+        SyncManager.updateSyncPeriod(getContext(), hours);
     }
 
     @Override
