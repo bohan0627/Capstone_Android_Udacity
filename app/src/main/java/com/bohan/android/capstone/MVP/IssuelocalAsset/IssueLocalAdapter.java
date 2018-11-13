@@ -57,7 +57,7 @@ class IssueLocalAdapter extends RecyclerView.Adapter<IssueLocalViewHolder> {
         return issueList.get(position).id();
     }
 
-    public List<ComicIssueList> getIssue() {
+    public List<ComicIssueList> getIssueList() {
         return issueList;
     }
 

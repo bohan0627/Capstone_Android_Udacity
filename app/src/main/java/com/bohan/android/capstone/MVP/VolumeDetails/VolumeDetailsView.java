@@ -9,6 +9,6 @@ import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 public interface VolumeDetailsView extends MvpLceView<ComicVolume> {
 
         void mark();
-        void unmark();
-        void onClick();
+        void unMark();
+        void onClickVolumeDetails();
         }

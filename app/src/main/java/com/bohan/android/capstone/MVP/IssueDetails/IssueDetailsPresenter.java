@@ -3,6 +3,7 @@ package com.bohan.android.capstone.MVP.IssueDetails;
 import com.bohan.android.capstone.Helper.Utils.ContentUtils;
 import com.bohan.android.capstone.model.ComicModel.ComicIssue;
 import com.bohan.android.capstone.model.data.Local.ComicLocalSource;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceHelper;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import javax.inject.Inject;
@@ -19,10 +20,10 @@ import timber.log.Timber;
 public class IssueDetailsPresenter  extends MvpBasePresenter<IssueDetailsView> {
 
     public final ComicLocalSource localSource;
-    public final ComicRemoteSource remoteSource;
+    public final ComicRemoteSourceHelper remoteSource;
 
     @Inject
-    IssueDetailsPresenter(ComicLocalSource localSource, ComicRemoteSource remoteSource) {
+    IssueDetailsPresenter(ComicLocalSource localSource, ComicRemoteSourceHelper remoteSource) {
         this.localSource = localSource;
         this.remoteSource = remoteSource;
     }
@@ -49,7 +50,7 @@ public class IssueDetailsPresenter  extends MvpBasePresenter<IssueDetailsView> {
     }
 
     void fetchIssueDetails(long issueId) {
-        remoteSource.issueDetailsByIssueId(issueId).subscribe(getIssueDetailsObserver());
+        remoteSource.getIssueDetailsById(issueId).subscribe(getIssueDetailsObserver());
     }
 
     private SingleObserver<ComicIssue> getIssueDetailsObserver() {

@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.IssuelocalAsset;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,9 +31,12 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
+import com.bohan.android.capstone.model.data.Local.ComicLocalSourceModule;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceModule;
 import com.evernote.android.state.State;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.data.RetainingLceViewState;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 /**
  * Created by Bo Han.
@@ -160,9 +163,9 @@ public class IssueLocalFragment extends
     @Override
     protected void injectDependencies() {
         localComponent = ComicsLoverApp.getAppComponent()
-                .plusRemoteComponent(new ComicRemoteDataModule())
-                .plusLocalComponent(new ComicLocalDataModule())
-                .pluslocalComponent();
+                .plusRemoteComponent(new ComicRemoteSourceModule())
+                .plusLocalComponent(new ComicLocalSourceModule())
+                .plusLocalComponent();
         localComponent.inject(this);
     }
 
@@ -170,7 +173,7 @@ public class IssueLocalFragment extends
 
     @Override
     public List<ComicIssueList> getData() {
-        return localAdapter == null ? null : localAdapter.getIssues();
+        return localAdapter == null ? null : localAdapter.getIssueList();
     }
 
     @NonNull
@@ -218,18 +221,18 @@ public class IssueLocalFragment extends
 
     @Override
     public void setData(List<ComicIssueList> data) {
-        localAdapter.setIssues(data);
+        localAdapter.setissueList(data);
         localAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        setTitle("My collection");
-        presenter.loadIssueLocal();
+        setIssueTitle("My collection");
+        presenter.fetchLocalIssue();
     }
 
     @Override
-    public void loadDataFiltered(String filter) {
+    public void fetchDataByFilters(String filter) {
         setIssueTitle(filter);
         presenter.fetchLocalIssueByName(filter);
     }
@@ -254,7 +257,7 @@ public class IssueLocalFragment extends
 
                 if (search.length() > 0) {
                     showClearQueryMenuItem(true);
-                    loadDataFiltered(search);
+                    fetchDataByFilters(search);
                 }
                 return false;
             }

@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * Created by Bo Han.
  */
-public interface IssueView extends MvpLceView<List<ComicIssueList>> {
+public interface IssueListView extends MvpLceView<List<ComicIssueList>> {
 
     void displayEmptyView(boolean instruction);
     void fetchIssueByDate(String date);
     void fetchIssueByFilters(String filters);
     void chooseFetchIssue();
-    void dispalyErrorMessage(String message);
+    void displayErrorMessage(String message);
     void setTitle(String title);
 }

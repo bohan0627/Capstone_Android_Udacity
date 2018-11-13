@@ -2,9 +2,11 @@ package com.bohan.android.capstone.MVP.IssueDetails;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,18 +16,30 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicLceFragment;
+import com.bohan.android.capstone.Helper.Utils.ImageUtils;
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.CharacterDetails.CharacterDetailsActivity;
 import com.bohan.android.capstone.R;
+import com.bohan.android.capstone.model.ComicModel.ComicCharacterShort;
 import com.bohan.android.capstone.model.ComicModel.ComicIssue;
+import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
+import com.bohan.android.capstone.model.data.Local.ComicLocalSourceModule;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceModule;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
+import com.hannesdorfmann.mosby3.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby3.mvp.viewstate.lce.data.RetainingLceViewState;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindBool;
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
 import static java.security.AccessController.getContext;
@@ -64,7 +78,7 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
     boolean twoPaneMode;
 
     private IssueDetailsComponent issueDetailsComponent;
-    private ComicIssueInfo currentIssue;
+    private ComicIssue currentIssue;
     private IssueCharacterAdapter listAdapter;
     private Menu currentMenu;
 
@@ -111,7 +125,7 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
 
         currentMenu = menu;
 
-        presenter.setUpBookmarkIconState(issueId);
+        presenter.isCurrentIssueBookmarked(issueId);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -146,22 +160,22 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
 
     @Override
     protected void injectDependencies() {
-        issueDetailsComponent = ComicserApp.getAppComponent()
-                .plusRemoteComponent(new ComicRemoteDataModule())
-                .plusLocalComponent(new ComicLocalDataModule())
+        issueDetailsComponent = ComicsLoverApp.getAppComponent()
+                .plusRemoteComponent(new ComicRemoteSourceModule())
+                .plusLocalComponent(new ComicLocalSourceModule())
                 .plusIssueDetailsComponent();
         issueDetailsComponent.inject(this);
     }
     // --- MVP VIEW STATE ---
 
     @Override
-    public ComicIssueInfo getData() {
+    public ComicIssue getData() {
         return currentIssue;
     }
 
     @NonNull
     @Override
-    public LceViewState<ComicIssueInfo, IssueDetailsView> createViewState() {
+    public LceViewState<ComicIssue, IssueDetailsView> createViewState() {
         return new RetainingLceViewState<>();
     }
 
@@ -196,34 +210,34 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
     }
 
     @Override
-    public void setData(ComicIssueInfo data) {
+    public void setData(ComicIssue data) {
         currentIssue = data;
         bindIssueDataToUi(currentIssue);
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadIssueDetails(issueId);
+        presenter.fetchIssueDetails(issueId);
     }
 
     @Override
-    public void markAsBookmarked() {
+    public void mark() {
         currentMenu.findItem(R.id.action_bookmark).setIcon(R.drawable.ic_bookmark_black_24dp);
 
-        ViewUtils.tintMenuIcon(getContext(), currentMenu, R.id.action_bookmark,
+        ViewUtils.colorMenu(getContext(), currentMenu, R.id.action_bookmark,
                 R.color.material_color_white);
     }
 
     @Override
-    public void unmarkAsBookmarked() {
+    public void unMark() {
         currentMenu.findItem(R.id.action_bookmark).setIcon(R.drawable.ic_bookmark_border_black_24dp);
 
-        ViewUtils.tintMenuIcon(getContext(), currentMenu, R.id.action_bookmark,
+        ViewUtils.colorMenu(getContext(), currentMenu, R.id.action_bookmark,
                 R.color.material_color_white);
     }
 
     @Override
-    public void onBookmarkClick() {
+    public void onClickBookmark() {
 
         if (currentIssue == null) {
             return;
@@ -234,14 +248,14 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
         boolean isBookmarkedNow = presenter.isCurrentIssueBookmarked(issueId);
 
         if (isBookmarkedNow) {
-            presenter.removeBookmark(issueId);
+            presenter.removeBookmarkIssue(issueId);
             message = messageBookmarkRemoved;
         } else {
-            presenter.bookmarkIssue(currentIssue);
+            presenter.addBookmarkIssue(currentIssue);
             message = messageBookmarked;
         }
 
-        presenter.setUpBookmarkIconState(issueId);
+        presenter.setBookmarkState(issueId);
 
         int parentLayoutId = (twoPaneMode) ?
                 R.id.main_coordinator_layout :
@@ -256,31 +270,31 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
 
     // --- UI BINDING UTILS ---
 
-    private void bindIssueDataToUi(ComicIssueInfo issue) {
+    private void bindIssueDataToUi(ComicIssue issue) {
 
-        loadHeaderImage(issueScreen, issue.image());
+        loadHeaderImage(issueScreen, issue.issueMainImage());
 
-        String volumeName = issue.volume().name();
-        int issueNumber = issue.issue_number();
+        String volumeName = issue.volume().volumeName();
+        int issueNumber = issue.issueNumber();
         setUpHeaderText(issueFullTitleName, volumeName, issueNumber);
-        setUpOtherText(issueSeparateName, issue.name());
-        setUpDate(issueCoverDate, issue.cover_date());
-        setUpDate(issueStoreDate, issue.store_date());
-        setUpDescription(issueDescription, issue.description());
-        setUpCharactersList(charactersView, charactersList, issue.character_credits());
+        setUpOtherText(issueSeparateName, issue.issueName());
+        setUpDate(issueCoverDate, issue.issueCoverDate());
+        setUpDate(issueStoreDate, issue.issueFirstStoreDate());
+        setUpDescription(issueDescription, issue.issueDescription());
+        setUpCharactersList(charactersView, charactersList, issue.charactersInIssue());
     }
 
-    private void loadHeaderImage(ImageView header, ComicImages image) {
+    private void loadHeaderImage(ImageView header, ComicImageHelper image) {
         if (image != null) {
-            String imageUrl = image.small_url();
-            ImageUtils.loadImageWithTopCrop(header, imageUrl);
+            String imageUrl = image.imageSmallUrl();
+            ImageUtils.imageWithCropOnTop(header, imageUrl);
         } else {
             header.setVisibility(View.GONE);
         }
     }
 
     private void setUpHeaderText(TextView textView, String volumeName, int number) {
-        textView.setText(IssueTextUtils.getFormattedIssueTitle(volumeName, number));
+        textView.setText(TextUtils.issueTitleFromVolume(volumeName, number));
     }
 
     private void setUpOtherText(TextView textView, String name) {
@@ -301,17 +315,17 @@ public class IssueDetailsFragment  extends ComicLceFragment<LinearLayout, ComicI
 
     private void setUpDescription(TextView textView, String description) {
         if (description != null) {
-            textView.setText(HtmlUtils.parseHtmlText(description));
+            textView.setText(TextUtils.spannedHtmlText(description));
         } else {
             textView.setVisibility(View.GONE);
         }
     }
 
     private void setUpCharactersList(CardView parent, ListView listView,
-                                     List<ComicCharacterInfoShort> characters) {
+                                     List<ComicCharacterShort> characters) {
         if (characters != null && !characters.isEmpty()) {
-            listAdapter.replaceCharacters(characters);
-            ViewUtils.setListViewHeightBasedOnChildren(listView);
+            listAdapter.replaceCharacterListShort(characters);
+            ViewUtils.setListViewHeight(listView);
         } else {
             parent.setVisibility(View.GONE);
         }
