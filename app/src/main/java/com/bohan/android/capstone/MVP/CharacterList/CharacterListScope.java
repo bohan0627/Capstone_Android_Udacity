@@ -10,6 +10,6 @@ import javax.inject.Scope;
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CharacterScope {
+public @interface CharacterListScope {
 
 }

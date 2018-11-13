@@ -7,9 +7,9 @@ import dagger.Subcomponent;
  */
 @VolumeScope
 @Subcomponent
-public interface VolumeComponent {
+public interface VolumeListComponent {
 
-    VolumePresenter volumePresenter();
+    VolumeListPresenter volumeListPresenter();
 
-    void inject(VolumeFragment volumeFragment);
+    void inject(VolumeListFragment volumeListFragment);
 }

@@ -4,6 +4,7 @@ import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicPublisherHelper;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
 import java.util.List;
 
@@ -50,10 +51,10 @@ public abstract class ComicVolume {
 
     //A list of issues that appear in this volume
     @Nullable
-    public abstract List<ComicIssueShort> issues();
+    public abstract List<ComicIssueShort> issueList();
 
 
-    public static TypeAdapter<ComicVolumeInfo> typeAdapter(Gson gson) {
+    public static TypeAdapter<ComicVolume> typeAdapter(Gson gson) {
         return new AutoValue_ComicVolume.GsonTypeAdapter(gson);
     }
 }

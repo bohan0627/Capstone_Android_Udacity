@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Bo Han.
  * Using Mosby3: MVP + ViewState + LCE Views
  */
-public interface CharacterView  extends MvpLceView<List<ComicCharacterList>> {
+public interface CharacterListView extends MvpLceView<List<ComicCharacterList>> {
     void characterByName(String characterName);
 
     void displayBaseView(boolean instruction);

@@ -1,7 +1,9 @@
-package com.bohan.android.capstone.model.data;
+package com.bohan.android.capstone.model.data.Local;
 
 import android.content.ContentResolver;
 import android.content.Context;
+
+import com.bohan.android.capstone.model.data.Local.ComicLocalScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,12 +16,12 @@ public class ComicLocalSourceModule {
 
     @Provides
     @ComicLocalScope
-    ComicLocalDataHelper provideComicLocalDataHelper(ContentResolver resolver) {
-        return new ComicLocalDataHelper(resolver);
+    ComicLocalSourceHelper provideComicLocalDataHelper(ContentResolver resolver) {
+        return new ComicLocalSourceHelper(resolver);
     }
 
     @Provides
-    @LocalDataScope
+    @ComicLocalScope
     ContentResolver provideContentResolver(Context context) {
         return context.getContentResolver();
     }

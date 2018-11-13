@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model.data;
+package com.bohan.android.capstone.model.data.Local;
 
 /**
  * Created by Bo Han.

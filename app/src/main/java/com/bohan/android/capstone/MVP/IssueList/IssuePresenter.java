@@ -3,9 +3,8 @@ package com.bohan.android.capstone.MVP.IssueList;
 import android.content.Context;
 
 import com.bohan.android.capstone.model.Prefs.ComicPrefsHelper;
-import com.bohan.android.capstone.model.data.ComicRemoteSource;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
-import com.bohan.android.capstone.model.data.ComicLocalSource;
+import com.bohan.android.capstone.model.data.Local.ComicLocalSource;
 
 import java.util.List;
 

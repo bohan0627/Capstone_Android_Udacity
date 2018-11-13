@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model.data;
+package com.bohan.android.capstone.model.data.Local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,8 +35,8 @@ public class ComicsDBHelper extends SQLiteOpenHelper {
                     IssueEntry.COLUMN_ISSUE_VOLUME_NAME + TEXT_TYPE + SEPARATOR +
                     " UNIQUE (" + IssueEntry.COLUMN_ISSUE_ID + ") ON CONFLICT REPLACE);";
 
-    private static final String SQL_CREATE_OWNED_ISSUES_TABLE =
-            "CREATE TABLE " + IssueEntry.TABLE_NAME_OWNED_ISSUES + " (" +
+    private static final String SQL_CREATE_LOCAL_ISSUES_TABLE =
+            "CREATE TABLE " + IssueEntry.TABLE_NAME_LOCAL_ISSUES + " (" +
                     IssueEntry._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT," +
                     IssueEntry.COLUMN_ISSUE_ID + LONG_TYPE + SEPARATOR +
                     IssueEntry.COLUMN_ISSUE_NUMBER + INTEGER_TYPE + SEPARATOR +
@@ -71,14 +71,14 @@ public class ComicsDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TODAY_ISSUES_TABLE);
-        db.execSQL(SQL_CREATE_OWNED_ISSUES_TABLE);
+        db.execSQL(SQL_CREATE_LOCAL_ISSUES_TABLE);
         db.execSQL(SQL_CREATE_local_volumes_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + LocalVolumeEntry.TABLE_NAME_LOCAL_VOLUMES);
-        db.execSQL("DROP TABLE IF EXISTS " + IssueEntry.TABLE_NAME_OWNED_ISSUES);
+        db.execSQL("DROP TABLE IF EXISTS " + IssueEntry.TABLE_NAME_LOCAL_ISSUES);
         db.execSQL("DROP TABLE IF EXISTS " + IssueEntry.TABLE_NAME_TODAY_ISSUES);
         onCreate(db);
     }

@@ -28,11 +28,11 @@ public abstract class ComicImageHelper {
     public abstract String imageTinyurl();
 
     public static Builder builder() {
-        return new AutoValue_ComicImages.Builder();
+        return new AutoValue_ComicImageHelper.Builder();
     }
 
     public static TypeAdapter<ComicImageHelper> typeAdapter(Gson gson) {
-        return new AutoValue_ComicImages.GsonTypeAdapter(gson);
+        return new AutoValue_ComicImageHelper.GsonTypeAdapter(gson);
     }
 
 

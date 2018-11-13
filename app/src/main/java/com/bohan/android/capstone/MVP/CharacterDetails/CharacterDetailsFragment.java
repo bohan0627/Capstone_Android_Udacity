@@ -6,10 +6,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicLceFragment;
+import com.bohan.android.capstone.Helper.Utils.ImageUtils;
+import com.bohan.android.capstone.Helper.Utils.NetworkUtils;
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacter;
+import com.bohan.android.capstone.model.ComicModel.ComicOrigin;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceModule;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.LceViewState;
@@ -85,7 +91,7 @@ public class CharacterDetailsFragment extends
     @Override
     protected void injectDependencies() {
         characterDetailsComponent = ComicsLoverApp.getAppComponent()
-                .plusRemoteComponent(new ComicRemoteDataModule())
+                .plusRemoteComponent(new ComicRemoteSourceModule())
                 .plusCharacterDetailsComponent();
 
         characterDetailsComponent.inject(this);
@@ -136,33 +142,33 @@ public class CharacterDetailsFragment extends
     }
 
     @Override
-    public void setData(ComicCharacterInfo data) {
+    public void setData(ComicCharacter data) {
         currentCharacterInfo = data;
         bindVolumeToUi(currentCharacterInfo);
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadCharacterDetails(characterId);
+        presenter.getCharacterDetailsById(characterId);
     }
 
     // --- UI BINDING UTILS ---
 
-    private void bindVolumeToUi(ComicCharacterInfo character) {
-        loadHeaderImage(characterPoster, character.image());
-        setUsualText(characterName, character.name());
-        setUsualText(characterRealName, character.real_name());
-        setUsualText(characterAliases, character.aliases());
-        setUsualText(characterBirthdate, character.birth());
-        setOrigin(characterOrigin, character.origin());
-        setGender(characterGender, character.gender());
-        setDescription(characterDescription, character.description());
+    private void bindVolumeToUi(ComicCharacter character) {
+        loadHeaderImage(characterPoster, character.characterMainImage());
+        setUsualText(characterName, character.characterName());
+        setUsualText(characterRealName, character.characterRealName());
+        setUsualText(characterAliases, character.characterAliases());
+        setUsualText(characterBirthdate, character.characterBirth());
+        setOrigin(characterOrigin, character.characterOrigin());
+        setGender(characterGender, character.characterGender());
+        setDescription(characterDescription, character.characterDescription());
     }
 
-    private void loadHeaderImage(ImageView header, ComicImages image) {
-        if (image != null) {
-            String imageUrl = image.small_url();
-            ImageUtils.loadImageWithTopCrop(header, imageUrl);
+    private void loadHeaderImage(ImageView header, ComicImageHelper imageHelper) {
+        if (imageHelper != null) {
+            String imageUrl = imageHelper.imageSmallUrl();
+            ImageUtils.imageWithCropOnTop(header, imageUrl);
         } else {
             header.setVisibility(View.GONE);
         }
@@ -176,9 +182,9 @@ public class CharacterDetailsFragment extends
         }
     }
 
-    private void setOrigin(TextView textView, ComicOriginInfoShort origin) {
+    private void setOrigin(TextView textView, ComicOrigin origin) {
         if (origin != null) {
-            textView.setText(origin.name());
+            textView.setText(origin.originName());
         } else {
             textView.setText("-");
         }
@@ -196,7 +202,7 @@ public class CharacterDetailsFragment extends
 
     private void setDescription(TextView textView, String description) {
         if (description != null) {
-            textView.setText(HtmlUtils.parseHtmlText(description));
+            textView.setText(TextUtils.spannedHtmlText(description));
         } else {
             textView.setVisibility(View.GONE);
         }

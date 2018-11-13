@@ -1,7 +1,7 @@
 package com.bohan.android.capstone.MVP.IssuelocalAsset;
 
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
-import com.bohan.android.capstone.model.data.ComicLocalSource;
+import com.bohan.android.capstone.model.data.Local.ComicLocalSource;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import java.util.List;

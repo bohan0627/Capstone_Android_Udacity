@@ -2,8 +2,8 @@ package com.bohan.android.capstone.MVP.CharacterList;
 
 import android.os.Bundle;
 
-import com.bohan.android.capstone.model.data.ComicRemoteSource;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceHelper;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
@@ -20,21 +20,21 @@ import timber.log.Timber;
  * Created by Bo Han.
  */
 @SuppressWarnings({"deprecation","WeakerAccess"})
-public class CharacterPresenter extends MvpBasePresenter<CharacterView> {
+public class CharacterListPresenter extends MvpBasePresenter<CharacterListView> {
 
     final FirebaseAnalytics firebaseAnalytics;
-    final ComicRemoteSource remoteSource;
+    final ComicRemoteSourceHelper remoteSource;
 
     @Inject
-    CharacterPresenter(FirebaseAnalytics firebaseAnalytics,
-                        ComicRemoteSource remoteSource) {
+    CharacterListPresenter(FirebaseAnalytics firebaseAnalytics,
+                           ComicRemoteSourceHelper remoteSource) {
         this.firebaseAnalytics = firebaseAnalytics;
         this.remoteSource = remoteSource;
     }
 
     void loadCharactersData(String characterName) {
         Timber.d("Fetching character by name: " + characterName);
-        remoteSource.characterListByCharacterName(characterName).subscribe(getObserver());
+        remoteSource.getCharactersListByName(characterName).subscribe(getObserver());
     }
 
     void logCharacterSearchEvent(String name) {

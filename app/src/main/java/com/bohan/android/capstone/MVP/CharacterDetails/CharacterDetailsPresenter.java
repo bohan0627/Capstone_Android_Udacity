@@ -1,7 +1,7 @@
 package com.bohan.android.capstone.MVP.CharacterDetails;
 
-import com.bohan.android.capstone.model.data.ComicRemoteSource;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacter;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceHelper;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
 import javax.inject.Inject;
@@ -17,16 +17,16 @@ import timber.log.Timber;
 @SuppressWarnings( "deprecation" )
 public class CharacterDetailsPresenter extends MvpBasePresenter<CharacterDetailsView> {
 
-    private final ComicRemoteSource remoteSource;
+    private final ComicRemoteSourceHelper remoteSource;
 
     @Inject
-    CharacterDetailsPresenter(ComicRemoteSource remoteSource){
+    CharacterDetailsPresenter(ComicRemoteSourceHelper remoteSource){
         this.remoteSource = remoteSource;
     }
 
     public void getCharacterDetailsById(long characterId) {
         remoteSource
-                .characterDetailsByCharacterId(characterId).subscribe(characterDetailsObserver());
+                .getCharacterDetailsById(characterId).subscribe(characterDetailsObserver());
     }
 
     private SingleObserver<ComicCharacter> characterDetailsObserver() {

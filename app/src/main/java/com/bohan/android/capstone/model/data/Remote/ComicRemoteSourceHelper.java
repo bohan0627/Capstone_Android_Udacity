@@ -1,6 +1,7 @@
-package com.bohan.android.capstone.model.data;
+package com.bohan.android.capstone.model.data.Remote;
 
 import com.bohan.android.capstone.BuildConfig;
+import com.bohan.android.capstone.Helper.ModelHelper.ServerHelper;
 import com.bohan.android.capstone.Helper.Utils.AutoValueUtils;
 import com.bohan.android.capstone.Helper.Utils.RxUtils;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacter;
@@ -9,7 +10,6 @@ import com.bohan.android.capstone.model.ComicModel.ComicIssue;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
 import com.bohan.android.capstone.model.ComicModel.ComicVolume;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
-import com.bohan.android.capstone.Helper.ModelHelper.ServerHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,66 +21,16 @@ import io.reactivex.Single;
 
 /**
  * Created by Bo Han.
- * This is for fetching data from remote API(Comic Vine)
  */
-public class ComicRemoteSource {
+public class ComicRemoteSourceHelper {
+    private static final String API_KEY = BuildConfig.COMICVINE_API_KEY;
 
-    //It will automatically invoke the API_KEY in the gradle file
-    private static final String API_KEY = BuildConfig.COMIC_API_KEY;
-
-    private final ComicsDataService comicService;
+    private final ComicsDataService comicsService;
 
     @Inject
-    public ComicRemoteSource(ComicsDataService comicService) {
-        this.comicService = comicService;
+    public ComicRemoteSourceHelper(ComicsDataService comicsService) {
+        this.comicsService = comicsService;
     }
-
-    /**
-     * Request volumes list (search by: specified name)
-     *
-     * @param name Target volume name.
-     * @return Volume info list.
-     */
-    public Single<List<ComicVolumeList>> volumeListByVolumeName(String volumeName) {
-
-        String fields = AutoValueUtils.autoVauleMethodsList(ComicVolumeList.class);
-
-        Map<String, String> options = new HashMap<>();
-        options.put("api_key", API_KEY);
-        options.put("filter", "name:" + volumeName);
-        options.put("field_list", fields);
-        options.put("format", "json");
-
-        return ComicsDataService
-                .getVolumesList(options)
-                .compose(RxUtils.applySchedulers())
-                .map(ServerHelper::results)
-                .singleOrError();
-    }
-
-    /**
-     * Request volume details (search by: volume id).
-     *
-     * @param volumeId Target volume id.
-     * @return Detailed volume info.
-     */
-    public Single<ComicVolume> volumeDetailsByVolumeId(long volumeId) {
-
-        String fields = AutoValueUtils.autoVauleMethodsList(ComicVolume.class);
-
-        Map<String, String> options = new HashMap<>();
-        options.put("api_key", API_KEY);
-        options.put("field_list", fields);
-        options.put("format", "json");
-
-        return ComicsDataService
-                .getVolumeDetails(volumeId, options)
-                .compose(RxUtils.applySchedulers())
-                .map(ServerHelper::results)
-                .singleOrError();
-
-    }
-
 
     /**
      * Request issues list (search by: current date).
@@ -88,7 +38,7 @@ public class ComicRemoteSource {
      * @param date Date string in YYYY-MM-DD format.
      * @return Issue info list.
      */
-    public Single<List<ComicIssueList>> issueListByDate(String date) {
+    public Single<List<ComicIssueList>> getIssuesListByDate(String date) {
 
         String fields = AutoValueUtils.autoVauleMethodsList(ComicIssueList.class);
 
@@ -99,7 +49,7 @@ public class ComicRemoteSource {
         options.put("sort", "name:asc");
         options.put("format", "json");
 
-        return ComicsDataService
+        return comicsService
                 .getIssuesList(options)
                 .compose(RxUtils.applySchedulers())
                 .map(ServerHelper::results)
@@ -113,7 +63,7 @@ public class ComicRemoteSource {
      * @param issueId Target issue id (!= issue number).
      * @return Detailed issue info.
      */
-    public Single<ComicIssue> issueDetailsByIssueId(long issueId) {
+    public Single<ComicIssue> getIssueDetailsById(long issueId) {
 
         String fields = AutoValueUtils.autoVauleMethodsList(ComicIssue.class);
 
@@ -122,13 +72,58 @@ public class ComicRemoteSource {
         options.put("field_list", fields);
         options.put("format", "json");
 
-        return ComicsDataService
+        return comicsService
                 .getIssueDetails(issueId, options)
                 .compose(RxUtils.applySchedulers())
                 .map(ServerHelper::results)
                 .singleOrError();
     }
 
+    /**
+     * Request volumes list (search by: specified name)
+     *
+     * @param name Target volume name.
+     * @return Volume info list.
+     */
+    public Single<List<ComicVolumeList>> getVolumesListByName(String name) {
+
+        String fields = AutoValueUtils.autoVauleMethodsList(ComicVolumeList.class);
+
+        Map<String, String> options = new HashMap<>();
+        options.put("api_key", API_KEY);
+        options.put("filter", "name:" + name);
+        options.put("field_list", fields);
+        options.put("format", "json");
+
+        return comicsService
+                .getVolumesList(options)
+                .compose(RxUtils.applySchedulers())
+                .map(ServerHelper::results)
+                .singleOrError();
+    }
+
+    /**
+     * Request volume details (search by: volume id).
+     *
+     * @param volumeId Target volume id.
+     * @return Detailed volume info.
+     */
+    public Single<ComicVolume> getVolumeDetailsById(long volumeId) {
+
+        String fields = AutoValueUtils.autoVauleMethodsList(ComicVolume.class);
+
+        Map<String, String> options = new HashMap<>();
+        options.put("api_key", API_KEY);
+        options.put("field_list", fields);
+        options.put("format", "json");
+
+        return comicsService
+                .getVolumeDetails(volumeId, options)
+                .compose(RxUtils.applySchedulers())
+                .map(ServerHelper::results)
+                .singleOrError();
+
+    }
 
     /**
      * Request characters list (search by: specified name)
@@ -136,17 +131,17 @@ public class ComicRemoteSource {
      * @param name Target character name to perform search.
      * @return Characters info list.
      */
-    public Single<List<ComicCharacterList>> characterListByCharacterName(String characterName) {
+    public Single<List<ComicCharacterList>> getCharactersListByName(String name) {
 
         String fields = AutoValueUtils.autoVauleMethodsList(ComicCharacterList.class);
 
         Map<String, String> options = new HashMap<>();
         options.put("api_key", API_KEY);
-        options.put("filter", "name:" + characterName);
+        options.put("filter", "name:" + name);
         options.put("field_list", fields);
         options.put("format", "json");
 
-        return ComicsDataService
+        return comicsService
                 .getCharactersList(options)
                 .compose(RxUtils.applySchedulers())
                 .map(ServerHelper::results)
@@ -159,7 +154,7 @@ public class ComicRemoteSource {
      * @param characterId Target character ud.
      * @return Detailed character info.
      */
-    public Single<ComicCharacter> characterDetailsByCharacterId(long characterId) {
+    public Single<ComicCharacter> getCharacterDetailsById(long characterId) {
 
         String fields = AutoValueUtils.autoVauleMethodsList(ComicCharacter.class);
 
@@ -168,7 +163,7 @@ public class ComicRemoteSource {
         options.put("field_list", fields);
         options.put("format", "json");
 
-        return ComicsDataService
+        return comicsService
                 .getCharacterDetails(characterId, options)
                 .compose(RxUtils.applySchedulers())
                 .map(ServerHelper::results)

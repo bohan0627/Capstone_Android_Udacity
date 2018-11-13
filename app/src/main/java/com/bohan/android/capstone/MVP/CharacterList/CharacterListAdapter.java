@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.bohan.android.capstone.Helper.Utils.ImageUtils;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicImageHelper;
 import com.bohan.android.capstone.Helper.ModelHelper.ComicPublisherHelper;
+import com.bohan.android.capstone.MVP.CharacterList.CharacterListAdapter.CharacterListViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,25 +27,25 @@ import butterknife.ButterKnife;
 /**
  * Created by Bo Han.
  */
-public class CharacterAdapter extends RecyclerView<CharacterViewHolder> {
+public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListViewHolder> {
     private List<ComicCharacterList> characterList;
     final OnVolumeClickListener listener;
 
-    CharacterAdapter(OnVolumeClickListener listener) {
+    CharacterListAdapter(OnVolumeClickListener listener) {
         characterList = new ArrayList<>(0);
         this.listener = listener;
     }
 
     @Override
-    public CharacterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CharacterListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_characters_list_item, parent, false);
 
-        return new CharacterViewHolder(view);
+        return new CharacterListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(CharacterViewHolder holder, int position) {
+    public void onBindViewHolder(CharacterListViewHolder holder, int position) {
         holder.bindTo(characterList.get(position));
     }
 
@@ -60,7 +62,7 @@ public class CharacterAdapter extends RecyclerView<CharacterViewHolder> {
         this.characterList = volumes;
     }
 
-    class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class CharacterListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private long currentCharacterId;
 
@@ -77,7 +79,7 @@ public class CharacterAdapter extends RecyclerView<CharacterViewHolder> {
         @BindString(R.string.volumes_publisher_text)
         String publisherFormat;
 
-        CharacterViewHolder(View itemView) {
+        CharacterListViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);

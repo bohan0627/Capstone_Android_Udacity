@@ -1,11 +1,24 @@
 package com.bohan.android.capstone.MVP.IssuelocalAsset;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.bohan.android.capstone.Helper.Utils.ImageUtils;
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
+import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
+import com.bohan.android.capstone.MVP.IssuelocalAsset.IssueLocalAsset.IssueLocalViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Bo Han.
@@ -14,43 +27,43 @@ import java.util.List;
 @SuppressWarnings("WeakerAccess")
 class IssueLocalAsset extends RecyclerView.Adapter<IssueLocalViewHolder> {
 
-    private List<ComicIssueList> issues;
+    private List<ComicIssueList> issueList;
     final OnIssueClickListener listener;
 
     IssueLocalAsset(OnIssueClickListener listener) {
-        issues = new ArrayList<>();
+        issueList = new ArrayList<>();
         this.listener = listener;
     }
 
     @Override
-    public OwnedIssueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public IssueLocalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_owned_issues_list_item, parent, false);
 
-        return new OwnedIssueViewHolder(view);
+        return new IssueLocalViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(OwnedIssueViewHolder holder, int position) {
+    public void onBindViewHolder(IssueLocalViewHolder holder, int position) {
         holder.bindTo(issues.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return issues == null ? 0 : issues.size();
+        return issueList == null ? 0 : issueList.size();
     }
 
     @Override
     public long getItemId(int position) {
-        return issues.get(position).id();
+        return issueList.get(position).issueId();
     }
 
-    public List<ComicIssueList> getIssues() {
-        return issues;
+    public List<ComicIssueList> getIssueList() {
+        return issueList;
     }
 
-    public void setIssues(List<ComicIssueList> issues) {
-        this.issues = issues;
+    public void setIssueList(List<ComicIssueList> issueList) {
+        this.issueList = issueList;
     }
 
     class IssueLocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -64,10 +77,9 @@ class IssueLocalAsset extends RecyclerView.Adapter<IssueLocalViewHolder> {
         @BindView(R.id.issue_cover_progressbar)
         ProgressBar progressBar;
 
-        OwnedIssueViewHolder(View itemView) {
+        IssueLocalViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
             itemView.setOnClickListener(this);
         }
 
@@ -76,25 +88,24 @@ class IssueLocalAsset extends RecyclerView.Adapter<IssueLocalViewHolder> {
             listener.issueClicked(currentIssueId);
         }
 
-        void bindTo(ComicIssueInfoList issue) {
+        void bindTo(ComicIssueList issueList) {
 
-            currentIssueId = issue.id();
+            currentIssueId = issueList.issueId();
 
-            String coverUrl = issue.image().small_url();
-            String issueNameText = issue.name();
-            String volumeNameText = issue.volume().name();
-            int number = issue.issue_number();
+            String coverUrl = issueList.issueName().small_url();
+            String issueNameText = issueList.issueName();
+            String volumeNameText = issueList.volume().volumeName();
+            int number = issueList.issueNumber();
 
-            String name = IssueTextUtils.getFormattedIssueName(issueNameText, volumeNameText, number);
+            String name = TextUtils.issueNameFromVolume(issueNameText, volumeNameText, number);
             issueName.setText(name);
 
-            if (coverUrl != null) {
-                ImageUtils.loadImageWithProgress(issueCover, coverUrl, progressBar);
-            }
+            if (coverUrl != null)
+                ImageUtils.fetchingImageWithProgress(progressBar, issueCover, coverUrl);
         }
     }
 
     interface OnIssueClickListener {
-
         void issueClicked(long issueId);
     }
+}

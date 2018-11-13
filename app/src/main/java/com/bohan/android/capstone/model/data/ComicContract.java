@@ -12,9 +12,9 @@ public class ComicContract {
     public static final String CONTENT_AUTHORITY = "com.bohan.comicsLover";
     static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    static final String PATH_TODAY_ISSUES = "today_issues";
-    static final String PATH_OWNED_ISSUES = "owned_issues";
-    static final String PATH_local_volumes = "local_volumes";
+    public static final String PATH_TODAY_ISSUES = "today_issues";
+    public static final String PATH_LOCAL_ISSUES = "local_issues";
+    public static final String PATH_LOCAL_VOLUMES = "local_volumes";
 
     public static final class IssueEntry implements BaseColumns {
 
@@ -22,7 +22,7 @@ public class ComicContract {
                 .appendPath(PATH_TODAY_ISSUES)
                 .build();
 
-        static final String TABLE_NAME_TODAY_ISSUES = "today_issues";
+        public static final String TABLE_NAME_TODAY_ISSUES = "today_issues";
         public static final String COLUMN_ISSUE_ID = "issue_id";
         public static final String COLUMN_ISSUE_NAME = "issue_name";
         public static final String COLUMN_ISSUE_NUMBER = "issue_number";
@@ -34,20 +34,20 @@ public class ComicContract {
         public static final String COLUMN_ISSUE_VOLUME_ID = "issue_volume_id";
         public static final String COLUMN_ISSUE_VOLUME_NAME = "issue_volume_name";
 
-        static final String TABLE_NAME_OWNED_ISSUES = "owned_issues";
+        public static final String TABLE_NAME_LOCAL_ISSUES = " local_issues";
 
-        static final Uri CONTENT_URI_OWNED_ISSUES = BASE_CONTENT_URI.buildUpon()
-                .appendPath(PATH_OWNED_ISSUES)
+        public static final Uri CONTENT_URI_LOCAL_ISSUES = BASE_CONTENT_URI.buildUpon()
+                .appendPath(PATH_LOCAL_ISSUES)
                 .build();
     }
 
     public static final class LocalVolumeEntry implements BaseColumns {
 
-        public static final Uri CONTENT_URI_local_volumes = BASE_CONTENT_URI.buildUpon()
-                .appendPath(PATH_local_volumes)
+        public static final Uri CONTENT_URI_LOCAL_VOLUMES = BASE_CONTENT_URI.buildUpon()
+                .appendPath(PATH_LOCAL_VOLUMES)
                 .build();
 
-        static final String TABLE_NAME_LOCAL_VOLUMES = "local_volumes";
+        public static final String TABLE_NAME_LOCAL_VOLUMES = "local_volumes";
         public static final String COLUMN_VOLUME_ID = "volume_id";
         public static final String COLUMN_VOLUME_NAME = "volume_name";
         public static final String COLUMN_VOLUME_ISSUES_COUNT = "volume_issues_count";

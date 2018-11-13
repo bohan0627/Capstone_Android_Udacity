@@ -19,11 +19,11 @@ public abstract class ComicPublisherHelper {
     public abstract String publisherName();
 
     public static Builder builder() {
-        return new AutoValue_ComicPublisher.Builder();
+        return new AutoValue_ComicPublisherHelper.Builder();
     }
 
     public static TypeAdapter<ComicPublisherHelper> typeAdapter(Gson gson) {
-        return new AutoValue_ComicPublisher.GsonTypeAdapter(gson);
+        return new AutoValue_ComicPublisherHelper.GsonTypeAdapter(gson);
     }
 
 

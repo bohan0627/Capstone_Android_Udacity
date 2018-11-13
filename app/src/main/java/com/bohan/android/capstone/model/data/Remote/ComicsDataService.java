@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model.data;
+package com.bohan.android.capstone.model.data.Remote;
 
 import java.util.List;
 import java.util.Map;

@@ -35,10 +35,10 @@ public abstract class ComicIssueShort {
     @AutoValue.Builder
     public abstract static class Builder {
 
-        public abstract com.bohan.android.capstone.model.ComicIssueShort.Builder issueId(long issueId);
-        public abstract com.bohan.android.capstone.model.ComicIssueShort.Builder issueName(String issueName);
-        public abstract com.bohan.android.capstone.model.ComicIssueShort.Builder issueNumber(int issueNumber);
+        public abstract Builder issueId(long issueId);
+        public abstract Builder issueName(String issueName);
+        public abstract Builder issueNumber(int issueNumber);
 
-        public abstract com.bohan.android.capstone.model.ComicIssueShort build();
+        public abstract ComicIssueShort build();
     }
 }

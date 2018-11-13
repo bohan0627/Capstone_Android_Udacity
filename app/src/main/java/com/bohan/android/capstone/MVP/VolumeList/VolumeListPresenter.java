@@ -2,7 +2,6 @@ package com.bohan.android.capstone.MVP.VolumeList;
 
 import android.os.Bundle;
 
-import com.bohan.android.capstone.model.data.ComicRemoteSource;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.analytics.FirebaseAnalytics.Param;
@@ -22,13 +21,13 @@ import timber.log.Timber;
  * Created by Bo Han.
  */
 @SuppressWarnings("deprecation")
-public class VolumePresenter extends MvpBasePresenter<VolumeView> {
+public class VolumeListPresenter extends MvpBasePresenter<VolumeView> {
 
     private final FirebaseAnalytics firebaseAnalytics;
     private final ComicRemoteSource remoteSource;
 
     @Inject
-    VolumePresenter(FirebaseAnalytics firebaseAnalytics, ComicRemoteSource remoteSource) {
+    VolumeListPresenter(FirebaseAnalytics firebaseAnalytics, ComicRemoteSource remoteSource) {
         this.firebaseAnalytics = firebaseAnalytics;
         this.remoteSource = remoteSource;
     }

@@ -1,4 +1,4 @@
-package com.bohan.android.capstone.model.data;
+package com.bohan.android.capstone.model.data.Local;
 
 import android.content.Context;
 
@@ -9,11 +9,11 @@ import dagger.Provides;
  * Created by Bo Han.
  */
 @Module
-public class ComicsDBHelperModule {
-
+public class ComicsLocalDBHelperModule {
     @Provides
     @ComicLocalScope
-    ComicsDBHelper provideComicsDBHelper(Context context) {
+    ComicsDBHelper provideComicDBHelper(Context context) {
         return new ComicsDBHelper(context);
     }
 }
+
