@@ -5,7 +5,7 @@ import dagger.Subcomponent;
 /**
  * Created by Bo Han.
  */
-@VolumeScope
+@VolumeListScope
 @Subcomponent
 public interface VolumeListComponent {
 

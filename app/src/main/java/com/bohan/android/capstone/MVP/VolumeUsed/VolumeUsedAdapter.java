@@ -2,6 +2,7 @@ package com.bohan.android.capstone.MVP.VolumeUsed;
 
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.bohan.android.capstone.Helper.Utils.ImageUtils;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
+
+import com.bohan.android.capstone.MVP.VolumeUsed.VolumeUsedAdapter.VolumeViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +27,7 @@ public class VolumeUsedAdapter extends RecyclerView.Adapter<VolumeViewHolder> {
     final OnVolumeClickListener listener;
     Cursor cursor;
 
-    VolumesUsedAdapter(OnVolumeClickListener listener) {
+    VolumeUsedAdapter(OnVolumeClickListener listener) {
         this.listener = listener;
     }
 
@@ -112,7 +115,7 @@ public class VolumeUsedAdapter extends RecyclerView.Adapter<VolumeViewHolder> {
             Timber.d("Trying to get name");
             String name = cursor.getString(nameIndex);
 
-            ImageUtils.loadImageWithProgress(volumeCover, coverUrl, progressBar);
+            ImageUtils.fetchingImageWithProgress(progressBar,volumeCover, coverUrl);
             volumeName.setText(name);
         }
 

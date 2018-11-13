@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Bo Han.
  */
-public interface VolumeView extends MvpLceView<List<ComicVolumeList>> {
+public interface VolumeListView extends MvpLceView<List<ComicVolumeList>> {
 
     void fetchVolumeByName(String volumeName);
     void displayBaseView(boolean instruction);

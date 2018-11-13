@@ -3,6 +3,7 @@ package com.bohan.android.capstone.MVP.VolumeList;
 import android.os.Bundle;
 
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
+import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceHelper;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.analytics.FirebaseAnalytics.Param;
 import com.google.firebase.analytics.FirebaseAnalytics.Event;
@@ -21,13 +22,13 @@ import timber.log.Timber;
  * Created by Bo Han.
  */
 @SuppressWarnings("deprecation")
-public class VolumeListPresenter extends MvpBasePresenter<VolumeView> {
+public class VolumeListPresenter extends MvpBasePresenter<VolumeListView> {
 
     private final FirebaseAnalytics firebaseAnalytics;
-    private final ComicRemoteSource remoteSource;
+    private final ComicRemoteSourceHelper remoteSource;
 
     @Inject
-    VolumeListPresenter(FirebaseAnalytics firebaseAnalytics, ComicRemoteSource remoteSource) {
+    VolumeListPresenter(FirebaseAnalytics firebaseAnalytics, ComicRemoteSourceHelper remoteSource) {
         this.firebaseAnalytics = firebaseAnalytics;
         this.remoteSource = remoteSource;
     }
@@ -35,7 +36,7 @@ public class VolumeListPresenter extends MvpBasePresenter<VolumeView> {
 
     void fetchVolumeByName(String volumeName) {
         Timber.d("Fetching volume by name: " + volumeName);
-        remoteSource.volumeListByVolumeName(volumeName)
+        remoteSource.getVolumesListByName(volumeName)
                 .subscribe(getObserver());
     }
 
