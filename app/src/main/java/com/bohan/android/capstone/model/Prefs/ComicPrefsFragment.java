@@ -46,7 +46,7 @@ public class ComicPrefsFragment extends PreferenceFragmentCompat
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        addPreferencesFromResource(R.xml.comicser_preferences);
+        addPreferencesFromResource(R.xml.app_prefs);
 
         Preference currentPreference =
                 getPreferenceScreen().findPreference(getString(R.string.prefs_sync_period_key));
