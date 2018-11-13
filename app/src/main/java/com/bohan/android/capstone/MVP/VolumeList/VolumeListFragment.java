@@ -136,7 +136,7 @@ public class VolumeListFragment extends
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_volumes;
+        return R.layout.fragment_volume_list;
     }
 
     @Override

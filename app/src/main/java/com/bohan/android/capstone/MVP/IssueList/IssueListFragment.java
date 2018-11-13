@@ -206,7 +206,7 @@ public class IssueListFragment extends
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_issues;
+        return R.layout.fragment_issue_list;
     }
 
     @Override

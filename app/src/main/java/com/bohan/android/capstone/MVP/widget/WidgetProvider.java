@@ -39,7 +39,7 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.today_issues_widget);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_issues_today);
             views.setRemoteAdapter(R.id.widget_list, new Intent(context, WidgetService.class));
             views.setEmptyView(R.id.widget_list, R.id.widget_empty);
 

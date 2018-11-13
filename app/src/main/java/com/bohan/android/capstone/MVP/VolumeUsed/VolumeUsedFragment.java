@@ -99,7 +99,7 @@ public class VolumeUsedFragment extends ComicFragment
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_volumes_tracker;
+        return R.layout.fragment_volume_used;
     }
 
     @Override

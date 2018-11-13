@@ -146,7 +146,7 @@ public class IssueLocalFragment extends
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_owned_issues;
+        return R.layout.fragment_local_issue_list_issues;
     }
 
     @Override

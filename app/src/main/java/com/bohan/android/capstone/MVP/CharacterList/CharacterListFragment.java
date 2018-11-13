@@ -136,7 +136,7 @@ public class CharacterListFragment extends
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_characters;
+        return R.layout.fragment_character_list;
     }
 
     @Override

@@ -97,7 +97,7 @@ public class WidgetFactory implements RemoteViewsFactory {
         }
 
         RemoteViews views = new RemoteViews(context.getPackageName(),
-                R.layout.today_issues_widget_list_item);
+                R.layout.widget_issues_list_item_today);
 
         String volume = cursor.getString(INDEX_VOLUME_NAME);
         int issueNumber = cursor.getInt(INDEX_ISSUE_NUMBER);

@@ -37,7 +37,7 @@ class IssueLocalAdapter extends RecyclerView.Adapter<IssueLocalViewHolder> {
     @Override
     public IssueLocalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_owned_issueList_list_item, parent, false);
+                .inflate(R.layout.fragment_local_issue_list_item, parent, false);
 
         return new IssueLocalViewHolder(view);
     }

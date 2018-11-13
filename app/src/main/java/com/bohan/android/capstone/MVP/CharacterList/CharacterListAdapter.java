@@ -39,7 +39,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListView
     @Override
     public CharacterListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_characters_list_item, parent, false);
+                .inflate(R.layout.fragment_character_list_item, parent, false);
 
         return new CharacterListViewHolder(view);
     }

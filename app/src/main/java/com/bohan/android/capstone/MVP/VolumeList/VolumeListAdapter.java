@@ -41,7 +41,7 @@ class VolumeListAdapter extends RecyclerView.Adapter<VolumeViewHolder> {
     @Override
     public VolumeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_volumes_list_item, parent, false);
+                .inflate(R.layout.fragment_volume_list_item, parent, false);
 
         return new VolumeViewHolder(view);
     }
