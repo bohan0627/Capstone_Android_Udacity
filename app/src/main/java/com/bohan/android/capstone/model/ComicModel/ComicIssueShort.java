@@ -15,11 +15,11 @@ import io.reactivex.annotations.Nullable;
  */
 @AutoValue
 public abstract class ComicIssueShort {
-    @Nullable
+    //@Nullable
     public abstract long issueId();
     @Nullable
     public abstract String issueName();
-    @Nullable
+    //@Nullable
     public abstract int issueNumber();
 
     public static ComicIssueShort.Builder builder() {

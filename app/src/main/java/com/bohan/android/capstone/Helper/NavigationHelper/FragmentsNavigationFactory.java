@@ -3,12 +3,18 @@ package com.bohan.android.capstone.Helper.NavigationHelper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.bohan.android.capstone.Helper.ComicPrefsFragment;
 import com.bohan.android.capstone.MVP.CharacterList.CharacterListFragment;
+import com.bohan.android.capstone.MVP.CharacterList.CharacterListFragmentBuilder;
 import com.bohan.android.capstone.MVP.IssueList.IssueListFragment;
+import com.bohan.android.capstone.MVP.IssueList.IssueListFragmentBuilder;
 import com.bohan.android.capstone.MVP.IssuelocalAsset.IssueLocalFragment;
+import com.bohan.android.capstone.MVP.IssuelocalAsset.IssueLocalFragmentBuilder;
 import com.bohan.android.capstone.MVP.VolumeList.VolumeListFragment;
+import com.bohan.android.capstone.MVP.VolumeList.VolumeListFragmentBuilder;
 import com.bohan.android.capstone.MVP.VolumeUsed.VolumeUsedFragment;
+import com.bohan.android.capstone.MVP.VolumeUsed.VolumeUsedFragmentBuilder;
+import com.bohan.android.capstone.model.Prefs.ComicPrefsFragment;
+import com.bohan.android.capstone.model.Prefs.ComicPrefsFragmentBuilder;
 
 /**
  * Created by Bo Han.

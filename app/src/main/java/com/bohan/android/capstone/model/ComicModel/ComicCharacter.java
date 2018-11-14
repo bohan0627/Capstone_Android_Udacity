@@ -23,7 +23,7 @@ public abstract class ComicCharacter {
     public abstract String characterBirth();
 
     //Number of issues this character appears in
-    @Nullable
+    //@Nullable
     public abstract int characterAppearancesInIssues();
 
     //Description of the character
@@ -31,11 +31,11 @@ public abstract class ComicCharacter {
     public abstract String characterDescription();
 
     //Gender of the character. Available options are: Male, Female, Other
-    @Nullable
+    //@Nullable
     public abstract int characterGender();
 
     //Unique ID of the character
-    @Nullable
+    //@Nullable
     public abstract long characterId();
 
     //Main image of the character

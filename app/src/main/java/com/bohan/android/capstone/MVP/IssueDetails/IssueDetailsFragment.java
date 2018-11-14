@@ -22,6 +22,7 @@ import com.bohan.android.capstone.Helper.Utils.ImageUtils;
 import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.CharacterDetails.CharacterDetailsActivity;
+import com.bohan.android.capstone.MVP.CharacterDetails.CharacterDetailsFragmentBuilder;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacterShort;
 import com.bohan.android.capstone.model.ComicModel.ComicIssue;

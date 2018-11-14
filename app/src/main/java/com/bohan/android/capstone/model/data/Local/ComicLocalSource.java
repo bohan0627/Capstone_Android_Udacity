@@ -86,7 +86,7 @@ public class ComicLocalSource {
 
     public Set<Long> localVolumeIdsFromDB() {
         Set<Long> volumeIds = null;
-        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_local_volumes,
+        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_LOCAL_VOLUMES,
                 new String[]{LocalVolumeEntry.COLUMN_VOLUME_ID},
                 null,
                 null,
@@ -135,7 +135,7 @@ public class ComicLocalSource {
 
     public boolean isVolumeLocaled(long volumeId) {
         boolean localed = false;
-        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_local_volumes,
+        Cursor cursor = contentResolver.query(LocalVolumeEntry.CONTENT_URI_LOCAL_VOLUMES,
                 null,
                 LocalVolumeEntry.COLUMN_VOLUME_ID + " = ?",
                 new String[]{String.valueOf(volumeId)},

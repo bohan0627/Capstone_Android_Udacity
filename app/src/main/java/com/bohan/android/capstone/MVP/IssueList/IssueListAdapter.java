@@ -39,7 +39,7 @@ class IssueListAdapter extends RecyclerView.Adapter<IssueListViewHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_issue_list_item, parent, false);
 
-        return new IssueViewHolder(view);
+        return new IssueListViewHolder(view);
     }
 
     @Override

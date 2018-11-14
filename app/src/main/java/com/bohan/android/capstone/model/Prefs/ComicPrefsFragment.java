@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.model.Prefs;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.View;
 import android.widget.Toolbar;
 
+import com.bohan.android.capstone.Helper.ModelHelper.ComicFragment;
+import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
+import com.bohan.android.capstone.Helper.SyncHelper.SyncManager;
 import com.bohan.android.capstone.R;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
@@ -63,7 +66,7 @@ public class ComicPrefsFragment extends PreferenceFragmentCompat
         String value = getPreferenceScreen().getSharedPreferences().getString(preference.getKey(), "");
         setPreferenceSummary(preference, value);
         int hours = Integer.parseInt(value);
-        ComicSyncManager.updateSyncPeriod(getContext(), hours);
+        SyncManager.updateSyncPeriod(getContext(), hours);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class ComicPrefsFragment extends PreferenceFragmentCompat
     private void startToolbarAnimation() {
         toolbar.animate()
                 .translationY(0)
-                .setDuration(BaseFragment.TOOLBAR_ANIMATION_DURATION)
-                .setStartDelay(BaseFragment.TOOLBAR_ANIMATION_DELAY);
+                .setDuration(ComicFragment.TOOLBAR_ANIMATION_DURATION)
+                .setStartDelay(ComicFragment.TOOLBAR_ANIMATION_DELAY);
     }
 }

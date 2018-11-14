@@ -5,7 +5,7 @@ import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 /**
  * Created by Bo Han.
  */
-public class NavigationPresenter extends MvpBasePresenter<NavigationView> {
+public class NavigationPresenter extends MvpBasePresenter<NavigationActivityView> {
     //Null
 }
 

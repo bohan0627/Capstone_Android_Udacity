@@ -16,7 +16,7 @@ import io.reactivex.annotations.Nullable;
 @AutoValue
 public abstract class ComicVolumeList {
 
-    @Nullable
+    //@Nullable
     public abstract long volumeId();
 
     @Nullable
@@ -28,10 +28,10 @@ public abstract class ComicVolumeList {
     @Nullable
     public abstract ComicPublisherHelper mainPublisher();
 
-    @Nullable
+    //@Nullable
     public abstract int volumeStartYear();
 
-    @Nullable
+    //@Nullable
     public abstract int volumeIssuesCount();
 
     public static Builder builder() {

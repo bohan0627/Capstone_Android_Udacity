@@ -22,7 +22,7 @@ public abstract class ComicVolume {
     public abstract String volumeName();
 
     //Unique ID of the volume
-    @Nullable
+    //@Nullable
     public abstract long volumeId();
 
     //Description of the volume
@@ -38,7 +38,7 @@ public abstract class ComicVolume {
     public abstract ComicPublisherHelper mainPublisher();
 
     //The first year this volume appeared in comics
-    @Nullable
+    //@Nullable
     public abstract int volumeStartYear();
 
     //A list of characters that appear in this volume
@@ -46,7 +46,7 @@ public abstract class ComicVolume {
     public abstract List<ComicCharacterShort> volumeCharacters();
 
     //Number of issues included in this volume
-    @Nullable
+    //@Nullable
     public abstract int issuesCount();
 
     //A list of issues that appear in this volume

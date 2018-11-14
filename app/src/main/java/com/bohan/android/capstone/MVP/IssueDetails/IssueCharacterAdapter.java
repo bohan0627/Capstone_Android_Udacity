@@ -58,7 +58,7 @@ public class IssueCharacterAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return characterList.get(position).id();
+        return characterList.get(position).characterId();
     }
 
 

@@ -1,6 +1,6 @@
 package com.bohan.android.capstone.MVP.IssueList;
 
-import android.app.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +28,7 @@ import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.Helper.Utils.ToolbarTargetUtils;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsActivity;
+import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsFragmentBuilder;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
@@ -36,6 +37,7 @@ import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceModule;
 import com.evernote.android.state.State;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.data.RetainingLceViewState;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -49,13 +51,15 @@ import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import timber.log.Timber;
 
 /**
  * Created by Bo Han.
  */
+@SuppressWarnings({"WeakerAccess", "deprecation"})
+@FragmentWithArgs
 public class IssueListFragment extends
         ComicLceFragment<SwipeRefreshLayout, List<ComicIssueList>, IssueListView, IssueListPresenter>
         implements IssueListView, SwipeRefreshLayout.OnRefreshListener {
@@ -136,9 +140,9 @@ public class IssueListFragment extends
         setHasOptionsMenu(true);
 
         if (isNotNullOrEmpty(searchQuery)) {
-            loadDataFiltered(searchQuery);
+            fetchIssueByFilters(searchQuery);
         } else if (isNotNullOrEmpty(chosenDate)) {
-            loadDataForChosenDate(chosenDate);
+            fetchIssueByDate(chosenDate);
         } else if (savedInstanceState != null) {
             loadData(false);
         }
@@ -188,13 +192,13 @@ public class IssueListFragment extends
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_choose_date:
-                choseDateAndLoadData();
+                chooseFetchIssue();
                 break;
             case R.id.action_clear_search_query:
                 showClearQueryMenuItem(false);
                 searchQuery = "";
                 if (isNotNullOrEmpty(chosenDate)) {
-                    loadDataForChosenDate(chosenDate);
+                    fetchIssueByDate(chosenDate);
                 } else {
                     loadData(false);
                 }
@@ -303,18 +307,18 @@ public class IssueListFragment extends
     }
 
     @Override
-    public void fetchIssueByDate() {
+    public void chooseFetchIssue() {
         Calendar now = Calendar.getInstance();
         DatePickerDialog dpd = DatePickerDialog.newInstance(
                 (view, year, monthOfYear, dayOfMonth) -> {
                     chosenDate = String.format(Locale.US, "%d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
-                    loadDataForChosenDate(chosenDate);
+                    fetchIssueByDate(chosenDate);
                 },
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH));
 
-        dpd.colo(ContextCompat.getColor(getContext(), R.color.colorAccent));
+        dpd.setAccentColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         dpd.show(getActivity().getFragmentManager(), "DatePickerDialog");
     }
 
@@ -400,7 +404,7 @@ public class IssueListFragment extends
 
             // Show first showcase
             new ShowcaseView.Builder(getActivity())
-                    .setTarget(new ToolbarTargetUtils(toolbar, R.id.action_choose_date))
+                    .setTarget(new ToolbarTargetUtils(R.id.action_choose_date,toolbar))
                     .withMaterialShowcase()
                     .hideOnTouchOutside()
                     .setStyle(R.style.ShowCaseDarkGreenPopup)
@@ -412,7 +416,7 @@ public class IssueListFragment extends
                             super.onShowcaseViewHide(showcaseView);
                             // Show second showcase
                             new ShowcaseView.Builder(getActivity())
-                                    .setTarget(new ToolbarTargetUtils(toolbar, R.id.action_search))
+                                    .setTarget(new ToolbarTargetUtils(R.id.action_search,toolbar))
                                     .withMaterialShowcase()
                                     .hideOnTouchOutside()
                                     .setStyle(R.style.ShowCaseDarkOrangePopup)

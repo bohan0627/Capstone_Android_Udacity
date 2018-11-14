@@ -53,7 +53,7 @@ class VolumeDetailsIssueAdapter extends
 
     @Override
     public long getItemId(int position) {
-        return issues.get(position).id();
+        return issues.get(position).issueId();
     }
 
     public List<ComicIssueShort> getIssues() {
@@ -87,7 +87,7 @@ class VolumeDetailsIssueAdapter extends
 
         void bindTo(ComicIssueShort issue) {
 
-            currentIssueId = issue.id();
+            currentIssueId = issue.issueId();
             int number = issue.issueNumber();
             issueNumber.setText(String.format(Locale.US, issueNumberFormat, number));
 

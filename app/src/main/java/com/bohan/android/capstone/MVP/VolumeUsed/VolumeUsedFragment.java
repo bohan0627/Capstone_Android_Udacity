@@ -1,17 +1,20 @@
 package com.bohan.android.capstone.MVP.VolumeUsed;
 
-import android.app.LoaderManager;
-import android.content.AsyncTaskLoader;
-import android.content.Loader;
+
+import android.support.v4.content.AsyncTaskLoader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
+
+import com.bohan.android.capstone.MVP.VolumeDetails.VolumeDetailsFragmentBuilder;
 import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 
 import com.bohan.android.capstone.Helper.ModelHelper.ComicFragment;

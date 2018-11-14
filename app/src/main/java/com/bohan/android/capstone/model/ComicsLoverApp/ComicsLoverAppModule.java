@@ -7,11 +7,13 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 
 /**
  * Created by Bo Han.
  */
+@Module
 public class ComicsLoverAppModule {
 
     @NonNull

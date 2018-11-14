@@ -15,7 +15,7 @@ import io.reactivex.annotations.Nullable;
 @AutoValue
 public abstract class ComicCharacterList {
 
-    @Nullable
+    //@Nullable
     public abstract long characterId();
     @Nullable
     public abstract String characterName();

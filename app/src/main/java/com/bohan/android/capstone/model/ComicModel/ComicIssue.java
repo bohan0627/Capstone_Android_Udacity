@@ -29,7 +29,7 @@ public abstract class ComicIssue {
     public abstract String issueDescription();
 
     //Unique ID of the issue
-    @Nullable
+    //@Nullable
     public abstract long issueId();
 
     //Main image of the issue
@@ -37,7 +37,7 @@ public abstract class ComicIssue {
     public abstract ComicImageHelper issueMainImage();
 
     //The number assigned to the issue within the volume set
-    @Nullable
+    //@Nullable
     public abstract int issueNumber();
 
     //Name of the issue

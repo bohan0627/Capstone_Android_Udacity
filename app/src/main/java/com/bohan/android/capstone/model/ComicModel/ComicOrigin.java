@@ -13,7 +13,7 @@ import io.reactivex.annotations.Nullable;
 @AutoValue
 public abstract class ComicOrigin {
 
-    @Nullable
+    //@Nullable
     public abstract long originId();
     @Nullable
     public abstract String originName();

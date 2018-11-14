@@ -23,6 +23,7 @@ import com.bohan.android.capstone.Helper.Utils.ImageUtils;
 import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsActivity;
+import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsFragmentBuilder;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueShort;
 import com.bohan.android.capstone.model.ComicModel.ComicVolume;
@@ -106,7 +107,7 @@ public class VolumeDetailsFragment extends
                     Fragment fragment = new IssueDetailsFragmentBuilder(issueId).build();
 
                     ViewUtils.replaceFragment(
-                            manager, fragment, R.id.content_frame, "IssueDetailsFragment", true);
+                            manager, fragment,"IssueDetailsFragment",  R.id.content_frame, true);
                 } else {
                     startActivity(IssueDetailsActivity.prepareIntent(getContext(), issueId));
                 }
@@ -152,7 +153,7 @@ public class VolumeDetailsFragment extends
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_track:
-                onTrackingClick();
+                onClickVolumeDetails();
                 break;
         }
 
@@ -294,18 +295,18 @@ public class VolumeDetailsFragment extends
 
     private void bindVolumeToUi(ComicVolume volume) {
 
-        loadHeaderImage(volumeCover, volume.image());
+        loadHeaderImage(volumeCover, volume.volumeMainImage());
 
-        String name = volume.name();
+        String name = volume.volumeName();
         volumeName.setText(name);
 
-        int year = volume.start_year();
+        int year = volume.volumeStartYear();
         volumeYear.setText(String.valueOf(year));
 
-        ComicPublisherInfo publisher = volume.publisher();
+        ComicPublisherHelper publisher = volume.mainPublisher();
         setUpPublisher(volumePublisher, publisher);
-        setUpDescription(volumeDescription, volume.description());
-        setUpIssuesList(issuesView, volume.issues());
+        setUpDescription(volumeDescription, volume.volumeDescription());
+        setUpIssuesList(issuesView, volume.issueList());
     }
 
     private void loadHeaderImage(ImageView header, ComicImageHelper image) {

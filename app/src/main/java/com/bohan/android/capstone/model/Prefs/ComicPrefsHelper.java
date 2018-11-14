@@ -3,6 +3,7 @@ package com.bohan.android.capstone.model.Prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.bohan.android.capstone.Helper.Utils.TextUtils;
 import com.bohan.android.capstone.R;
 
 import java.util.HashSet;
@@ -79,7 +80,7 @@ public class ComicPrefsHelper {
 
     private boolean isLastSyncWasToday() {
         String lastSyncDate = getLastSyncDate();
-        String today = DateTextUtils.getTodayDateString();
+        String today = TextUtils.dateStringForToday();
 
         return lastSyncDate.equals(today);
     }

@@ -13,7 +13,7 @@ import io.reactivex.annotations.Nullable;
 @AutoValue
 public abstract class ComicPublisherHelper {
 
-    @Nullable
+    //@Nullable
     public abstract long publisherId();
     @Nullable
     public abstract String publisherName();

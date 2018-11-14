@@ -14,7 +14,7 @@ import io.reactivex.annotations.Nullable;
 @AutoValue
 public abstract class ComicVolumeShort {
 
-    @Nullable
+    //@Nullable
     public abstract long volumeId();
     @Nullable
     public abstract String volumeName();

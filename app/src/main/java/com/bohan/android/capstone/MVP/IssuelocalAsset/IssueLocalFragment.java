@@ -16,6 +16,7 @@ import com.bohan.android.capstone.Helper.ModelHelper.ComicLceFragment;
 import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsActivity;
+import com.bohan.android.capstone.MVP.IssueDetails.IssueDetailsFragmentBuilder;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
 
@@ -34,6 +35,7 @@ import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.data.Local.ComicLocalSourceModule;
 import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceModule;
 import com.evernote.android.state.State;
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby3.mvp.viewstate.lce.data.RetainingLceViewState;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -42,6 +44,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
  * Created by Bo Han.
  */
 @SuppressWarnings("deprecation")
+@FragmentWithArgs
 public class IssueLocalFragment extends
         ComicLceFragment<RecyclerView, List<ComicIssueList>, IssueLocalView, IssueLocalPresenter>
         implements IssueLocalView{
@@ -82,7 +85,7 @@ public class IssueLocalFragment extends
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 Fragment fragment = new IssueDetailsFragmentBuilder(issueId).build();
                 ViewUtils.replaceFragment(
-                        manager, fragment, R.id.content_frame, "IssueDetailsFragment", true);
+                        manager, fragment,"IssueDetailsFragment",  R.id.content_frame, true);
             } else
                 startActivity(IssueDetailsActivity.prepareIntent(getContext(), issueId));
         });
@@ -93,10 +96,10 @@ public class IssueLocalFragment extends
         setHasOptionsMenu(true);
         contentView.setLayoutManager(manager);
         contentView.setHasFixedSize(true);
-        contentView.setlocalAdapter(localAdapter);
+        contentView.setAdapter(localAdapter);
 
         if (isNotNullOrEmpty(search))
-            loadDataFiltered(search);
+            fetchDataByFilters(search);
         else if (savedInstanceState != null)
             loadData(false);
     }
@@ -109,7 +112,7 @@ public class IssueLocalFragment extends
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_owned_issues_list, menu);
+        inflater.inflate(R.menu.fragment_local_issue_list, menu);
         //Get current menu
         currentMenu = menu;
         ViewUtils.colorMenu(getContext(), menu, R.id.action_search, R.color.material_color_white);
@@ -146,7 +149,7 @@ public class IssueLocalFragment extends
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_local_issue_list_issues;
+        return R.layout.fragment_local_issue_list;
     }
 
     @Override
@@ -157,7 +160,7 @@ public class IssueLocalFragment extends
     @NonNull
     @Override
     public IssueLocalPresenter createPresenter() {
-        return localComponent.presenter();
+        return localComponent.issueLocalPresenter();
     }
 
     @Override
@@ -165,7 +168,7 @@ public class IssueLocalFragment extends
         localComponent = ComicsLoverApp.getAppComponent()
                 .plusRemoteComponent(new ComicRemoteSourceModule())
                 .plusLocalComponent(new ComicLocalSourceModule())
-                .plusLocalComponent();
+                .plusLocalIssueComponent();
         localComponent.inject(this);
     }
 

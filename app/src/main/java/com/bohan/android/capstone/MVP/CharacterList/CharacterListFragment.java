@@ -16,6 +16,7 @@ import com.bohan.android.capstone.Helper.ModelHelper.ComicLceFragment;
 import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.CharacterDetails.CharacterDetailsActivity;
+import com.bohan.android.capstone.MVP.CharacterDetails.CharacterDetailsFragmentBuilder;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicCharacterList;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
@@ -183,7 +184,7 @@ public class CharacterListFragment extends
     @Override
     public void loadData(boolean pullToRefresh) {
         showLoading(false);
-        showInitialView(true);
+        displayBaseView(true);
     }
 
     @Override

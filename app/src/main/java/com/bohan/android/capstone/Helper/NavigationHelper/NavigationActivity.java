@@ -30,6 +30,7 @@ import javax.inject.Inject;
 
 import butterknife.BindBool;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
@@ -37,8 +38,8 @@ import io.reactivex.annotations.Nullable;
  * Created by Bo Han.
  */
 public class NavigationActivity extends
-        ComicMvpActivity<NavigationView, NavigationPresenter>
-        implements NavigationView, OnNavigationItemSelectedListener {
+        ComicMvpActivity<NavigationActivityView, NavigationPresenter>
+        implements NavigationActivityView, OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -75,7 +76,7 @@ public class NavigationActivity extends
         setUpNavigationDrawerParams();
 
         if (savedInstanceState == null) {
-            navigateToCurrentSection();
+            navigation();
         }
 
         String defaultSyncPeriod = comicPreferencesHelper.getSyncPeriod();
@@ -130,11 +131,11 @@ public class NavigationActivity extends
             currentSection = ComicAppNavigation.SETTINGS;
         }
 
-        navigateToCurrentSection();
+        navigation();
     }
 
     @Override
-    public void navigateToCurrentSection() {
+    public void navigation() {
 
         logChosenNavigationSection(currentSection);
 

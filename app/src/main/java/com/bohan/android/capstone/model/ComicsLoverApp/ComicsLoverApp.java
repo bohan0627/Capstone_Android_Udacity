@@ -23,7 +23,7 @@ public class ComicsLoverApp extends Application {
 
         if (comicsLoverAppComponent == null) {
             comicsLoverAppComponent = DaggerComicsLoverAppComponent.builder()
-                    .comicserAppModule(new ComicsLoverAppModule(this))
+                    .comicsLoverAppModule(new ComicsLoverAppModule(this))
                     .build();
         }
     }

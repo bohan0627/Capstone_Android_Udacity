@@ -16,6 +16,7 @@ import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.PAINT_
 /**
  * Created by Bo Han.
  */
+@SuppressWarnings("deprecation")
 public class GlideUtils extends BitmapTransformation {
 
 

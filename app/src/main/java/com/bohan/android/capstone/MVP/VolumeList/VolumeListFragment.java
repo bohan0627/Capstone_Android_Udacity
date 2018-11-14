@@ -16,6 +16,7 @@ import com.bohan.android.capstone.Helper.ModelHelper.ComicLceFragment;
 import com.bohan.android.capstone.Helper.NavigationHelper.NavigationActivity;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
 import com.bohan.android.capstone.MVP.VolumeDetails.VolumeDetailsActivity;
+import com.bohan.android.capstone.MVP.VolumeDetails.VolumeDetailsFragmentBuilder;
 import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.ComicModel.ComicVolumeList;
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
@@ -87,7 +88,7 @@ public class VolumeListFragment extends
                 Fragment fragment = new VolumeDetailsFragmentBuilder(volumeId).build();
 
                 ViewUtils.replaceFragment(
-                        manager, fragment, R.id.content_frame, "VolumeDetailsFragment", true);
+                        manager, fragment,"VolumeDetailsFragment", R.id.content_frame,  true);
             } else {
                 startActivity(VolumeDetailsActivity.prepareIntent(getContext(), volumeId));
             }
@@ -105,11 +106,11 @@ public class VolumeListFragment extends
         setHasOptionsMenu(true);
 
         if (chosenName != null && chosenName.length() > 0) {
-            loadDataByName(chosenName);
-            setTitle(chosenName);
+            fetchVolumeByName(chosenName);
+            setVolumeTitle(chosenName);
         } else {
-            setTitle(fragmentTitle);
-            showInitialView(true);
+            setVolumeTitle(fragmentTitle);
+            displayBaseView(true);
         }
     }
 
@@ -182,11 +183,11 @@ public class VolumeListFragment extends
     @Override
     public void loadData(boolean pullToRefresh) {
         showLoading(false);
-        showInitialView(true);
+        displayBaseView(true);
     }
 
     @Override
-    public void loadDataByName(String name) {
+    public void fetchVolumeByName(String name) {
         presenter.fetchVolumeByName(name);
     }
 
@@ -206,8 +207,8 @@ public class VolumeListFragment extends
                 chosenName = query;
 
                 if (chosenName.length() > 0) {
-                    loadDataByName(chosenName);
-                    setTitle(chosenName);
+                    fetchVolumeByName(chosenName);
+                    setVolumeTitle(chosenName);
                     presenter.logVolumeSearchEvent(chosenName);
                 }
                 return false;
@@ -223,8 +224,8 @@ public class VolumeListFragment extends
 
     @Override
     public void showContent() {
-        showInitialView(false);
-        showEmptyView(false);
+        displayBaseView(false);
+        displayEmptyView(false);
         super.showContent();
     }
 
