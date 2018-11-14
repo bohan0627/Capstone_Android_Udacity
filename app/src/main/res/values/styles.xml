@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
+
     <!-- Main activity theme -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -65,4 +66,5 @@
         <!-- Hint for edit text-->
         <item name="android:hint">@string/issues_search_hint</item>
     </style>
+
 </resources>

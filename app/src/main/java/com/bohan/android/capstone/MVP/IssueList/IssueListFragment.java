@@ -319,6 +319,7 @@ public class IssueListFragment extends
                 now.get(Calendar.DAY_OF_MONTH));
 
         dpd.setAccentColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+
         dpd.show(getActivity().getFragmentManager(), "DatePickerDialog");
     }
 

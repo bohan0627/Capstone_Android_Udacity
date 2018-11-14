@@ -7,7 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.bohan.android.capstone.R;
 import com.evernote.android.state.StateSaver;
