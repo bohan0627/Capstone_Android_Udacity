@@ -7,7 +7,7 @@ import com.google.gson.TypeAdapter;
 
 import java.util.List;
 
-import io.reactivex.annotations.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Bo Han.

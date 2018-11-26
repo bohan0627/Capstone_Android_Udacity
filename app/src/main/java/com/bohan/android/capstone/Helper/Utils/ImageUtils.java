@@ -11,6 +11,8 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+
+
 /**
  * Created by Bo Han.
  */
@@ -40,10 +42,10 @@ public class ImageUtils {
      * @param url Image url
      * @param progressBar ProgressBar view which shown while image loading
      */
-    public static void fetchingImageWithProgress(ProgressBar progressBar, ImageView view, String imageurl) {
+    public static void fetchingImageWithProgress(ProgressBar progressBar, ImageView view, String imageUrl) {
 
         Glide.with(view.getContext())
-                .load(imageurl)
+                .load(imageUrl)
                 .crossFade()
                 .listener(new RequestListener<String, GlideDrawable>() {
 

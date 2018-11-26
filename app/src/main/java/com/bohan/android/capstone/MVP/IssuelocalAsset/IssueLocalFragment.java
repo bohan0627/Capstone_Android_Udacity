@@ -29,7 +29,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.data.Local.ComicLocalSourceModule;

@@ -1,12 +1,12 @@
 package com.bohan.android.capstone.model.Prefs;
 
-import android.support.v7.app.ActionBar;
+import androidx.appcompat.app.ActionBar;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import android.view.View;
 import android.widget.Toolbar;
 
@@ -17,7 +17,7 @@ import com.bohan.android.capstone.R;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
 import butterknife.ButterKnife;
-import io.reactivex.annotations.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Bo Han.

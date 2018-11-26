@@ -42,7 +42,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Bo Han.

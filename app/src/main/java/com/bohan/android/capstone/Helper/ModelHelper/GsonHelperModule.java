@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.annotations.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Created by Bo Han.

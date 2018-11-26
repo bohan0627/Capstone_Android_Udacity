@@ -19,6 +19,7 @@ import com.bohan.android.capstone.model.data.Local.ComicProvider;
 import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
 import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

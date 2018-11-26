@@ -1,8 +1,8 @@
 package com.bohan.android.capstone.Helper.Utils;
 
 import android.graphics.Point;
-import android.support.annotation.IdRes;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.IdRes;
+import androidx.appcompat.widget.Toolbar;
 
 
 import com.github.amlcurran.showcaseview.targets.Target;

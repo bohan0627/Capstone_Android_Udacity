@@ -2,12 +2,11 @@ package com.bohan.android.capstone.Helper.ModelHelper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.evernote.android.state.StateSaver;
 
 import butterknife.ButterKnife;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Bo Han.

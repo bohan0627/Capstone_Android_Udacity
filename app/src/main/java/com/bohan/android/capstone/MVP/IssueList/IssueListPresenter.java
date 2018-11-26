@@ -9,6 +9,7 @@ import com.bohan.android.capstone.R;
 import com.bohan.android.capstone.model.Prefs.ComicPrefsHelper;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
 import com.bohan.android.capstone.model.data.Local.ComicLocalSource;
+import com.bohan.android.capstone.model.data.Local.ComicLocalSourceHelper;
 import com.bohan.android.capstone.model.data.Remote.ComicRemoteSourceHelper;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 
@@ -29,14 +30,14 @@ import timber.log.Timber;
 public class IssueListPresenter extends MvpBasePresenter<IssueListView> {
 
     final ComicPrefsHelper comicPreferencesHelper;
-    final ComicLocalSource localSource;
+    final ComicLocalSourceHelper localSource;
     final ComicRemoteSourceHelper remoteSource;
     final Context context;
 
     @Inject
     public IssueListPresenter(
             ComicPrefsHelper comicPreferencesHelper,
-            ComicLocalSource localSource,
+            ComicLocalSourceHelper localSource,
             ComicRemoteSourceHelper  remoteSource,
             Context context) {
         this.comicPreferencesHelper = comicPreferencesHelper;
@@ -81,7 +82,7 @@ public class IssueListPresenter extends MvpBasePresenter<IssueListView> {
 
     public void loadTodayIssuesFromDB() {
         localSource
-                .issuesTodayFromDB()
+                .issueListTodayFromDB()
                 .subscribe(getObserver());
     }
 

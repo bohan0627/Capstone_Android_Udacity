@@ -8,7 +8,7 @@
     <include layout="@layout/lce_base_view"/>
     <include layout="@layout/lce_error_view"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contentView"
         android:scrollbarStyle="outsideOverlay"
         android:layout_width="match_parent"

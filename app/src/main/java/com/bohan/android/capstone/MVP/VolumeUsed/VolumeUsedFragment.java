@@ -28,7 +28,7 @@ import butterknife.BindBool;
 import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Bo Han.

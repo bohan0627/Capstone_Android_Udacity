@@ -6,7 +6,7 @@ import android.os.IBinder;
 
 import com.bohan.android.capstone.Helper.SyncHelper.SyncAdapter;
 
-import io.reactivex.annotations.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Bo Han.

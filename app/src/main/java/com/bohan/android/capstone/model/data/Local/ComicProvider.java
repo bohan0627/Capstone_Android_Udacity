@@ -13,12 +13,11 @@ import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.data.ComicContract;
 import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
 import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
-import com.bohan.android.capstone.model.data.Local.ComicsDBHelper;
 
 import javax.inject.Inject;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Bo Han.

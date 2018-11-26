@@ -1,7 +1,7 @@
 package com.bohan.android.capstone.Helper.NavigationHelper;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.bohan.android.capstone.MVP.CharacterList.CharacterListFragment;
 import com.bohan.android.capstone.MVP.CharacterList.CharacterListFragmentBuilder;

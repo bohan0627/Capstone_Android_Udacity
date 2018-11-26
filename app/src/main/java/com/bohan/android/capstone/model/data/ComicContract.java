@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 @SuppressWarnings("WeakerAccess")
 public class ComicContract {
 
-    public static final String CONTENT_AUTHORITY = "com.bohan.comicsLover";
+    public static final String CONTENT_AUTHORITY = "com.bohan.android.capstone";
     static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_TODAY_ISSUES = "today_issues";

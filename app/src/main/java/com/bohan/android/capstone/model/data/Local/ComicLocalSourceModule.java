@@ -3,7 +3,6 @@ package com.bohan.android.capstone.model.data.Local;
 import android.content.ContentResolver;
 import android.content.Context;
 
-import com.bohan.android.capstone.model.data.Local.ComicLocalScope;
 
 import dagger.Module;
 import dagger.Provides;

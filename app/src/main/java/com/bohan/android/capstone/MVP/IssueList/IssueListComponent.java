@@ -9,7 +9,7 @@ import dagger.Subcomponent;
 @IssueListScope
 @Subcomponent
 public interface IssueListComponent {
-    IssueListPresenter issuelistPresenter();
+    IssueListPresenter issueListPresenter();
 
     void inject(IssueListFragment issueListFragment);
 }

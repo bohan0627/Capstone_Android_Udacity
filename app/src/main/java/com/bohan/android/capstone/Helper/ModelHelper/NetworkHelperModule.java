@@ -5,7 +5,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.annotations.NonNull;
+import androidx.annotation.NonNull;
 import okhttp3.OkHttpClient;
 
 /**

@@ -12,7 +12,7 @@ import com.bohan.android.capstone.R;
 import com.evernote.android.state.State;
 
 import butterknife.BindView;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Bo Han.

@@ -4,7 +4,7 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Bo Han.
@@ -27,15 +27,15 @@ public abstract class ComicImageHelper {
     @Nullable
     public abstract String imageTinyurl();
 
-    public static Builder builder() {
-        return new AutoValue_ComicImageHelper.Builder();
-    }
+
 
     public static TypeAdapter<ComicImageHelper> typeAdapter(Gson gson) {
         return new AutoValue_ComicImageHelper.GsonTypeAdapter(gson);
     }
 
-
+    public static Builder builder() {
+        return new AutoValue_ComicImageHelper.Builder();
+    }
 
     @AutoValue.Builder
     public abstract static class Builder {

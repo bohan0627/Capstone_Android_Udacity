@@ -3,11 +3,11 @@ package com.bohan.android.capstone.Helper.ModelHelper;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bohan.android.capstone.R;
 import com.evernote.android.state.StateSaver;
@@ -20,7 +20,7 @@ import javax.annotation.Syntax;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.annotations.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Bo Han.
@@ -63,7 +63,7 @@ public abstract class ComicLceFragment<CV extends View, M, V extends MvpLceView<
         injectDependencies();
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
-        toolbar = ButterKnife.findById(getActivity(), R.id.toolbar);
+        toolbar = ButterKnife.findById(requireActivity(), R.id.toolbar);
     }
 
     @Override

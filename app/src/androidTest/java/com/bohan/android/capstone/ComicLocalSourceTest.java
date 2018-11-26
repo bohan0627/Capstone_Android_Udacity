@@ -11,6 +11,7 @@ import com.bohan.android.capstone.model.data.ComicContract.LocalVolumeEntry;
 import com.bohan.android.capstone.model.data.ComicContract.IssueEntry;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -82,7 +83,8 @@ public class ComicLocalSourceTest {
         todayIssuesTableColumns.add(IssueEntry.COLUMN_ISSUE_MEDIUM_IMAGE);
         todayIssuesTableColumns.add(IssueEntry.COLUMN_ISSUE_HD_IMAGE);
         todayIssuesTableColumns.add(IssueEntry.COLUMN_ISSUE_VOLUME_ID);
-        todayIssuesTableColumns.add(IssueEntry.COLUMN_ISSUE_VOLUME_NAME);
+        todayIssuesTableColumns.add(IssueEntry.COLUMN_ISSUE_VOLUME_NAME);        todayIssuesTableColumns.add(IssueEntry.COLUMN_ISSUE_FIRST_STORE_DATE);
+
 
         int columnNameIndex = queryCursor.getColumnIndex("name");
 

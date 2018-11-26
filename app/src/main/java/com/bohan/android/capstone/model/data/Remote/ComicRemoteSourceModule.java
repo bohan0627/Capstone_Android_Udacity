@@ -23,7 +23,7 @@ public class ComicRemoteSourceModule {
 
     @Provides
     @ComicRemoteScope
-    ComicRemoteSourceHelper provideComicRemoteDataHelper(ComicsDataService service) {
+    ComicRemoteSourceHelper provideComicRemoteSourceHelper(ComicsDataService service) {
         return new ComicRemoteSourceHelper(service);
     }
 }

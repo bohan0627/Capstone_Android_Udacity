@@ -7,7 +7,7 @@ import android.net.Uri;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import androidx.annotation.NonNull;
 
 import com.bohan.android.capstone.Helper.Utils.ContentUtils;
 import com.bohan.android.capstone.model.ComicModel.ComicIssueList;
@@ -30,7 +30,7 @@ public class ComicLocalSourceHelper {
         this.contentResolver = contentResolver;
     }
 
-    public void issuesTodayToDB(@NonNull List<ComicIssueList> issueList) {
+    public void issueListTodayToDB(@NonNull List<ComicIssueList> issueList) {
 
         for (ComicIssueList issue : issueList) {
             contentResolver.insert(IssueEntry.CONTENT_URI_TODAY_ISSUES,
@@ -38,7 +38,7 @@ public class ComicLocalSourceHelper {
         }
     }
 
-    public Single<List<ComicIssueList>> issuesTodayFromDB() {
+    public Single<List<ComicIssueList>> issueListTodayFromDB() {
         return Single.create(e -> {
             Cursor cursor = contentResolver
                     .query(IssueEntry.CONTENT_URI_TODAY_ISSUES, null, null, null, null);
@@ -50,7 +50,7 @@ public class ComicLocalSourceHelper {
             } });
     }
 
-    public Single<List<ComicIssueList>> issuesLocalFromDB() {
+    public Single<List<ComicIssueList>> issueListLocalFromDB() {
         return Single.create(e -> {
             Cursor cursor = contentResolver
                     .query(IssueEntry.CONTENT_URI_LOCAL_ISSUES,
@@ -84,7 +84,7 @@ public class ComicLocalSourceHelper {
         return marked;
     }
 
-    public void issueTodayToDB(@NonNull ComicIssueList issueList) {
+    public void issueLocalTodayToDB(@NonNull ComicIssueList issueList) {
         contentResolver.insert(
                 IssueEntry.CONTENT_URI_LOCAL_ISSUES,
                 ContentUtils.contentValuesFromIssue(issueList));

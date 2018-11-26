@@ -227,7 +227,7 @@ public class IssueListFragment extends
     @NonNull
     @Override
     public IssueListPresenter createPresenter() {
-        return issuesComponent.issuelistPresenter();
+        return issuesComponent.issueListPresenter();
     }
 
     @Override

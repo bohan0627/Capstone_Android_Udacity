@@ -35,7 +35,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Bo Han.
@@ -155,7 +155,7 @@ public class VolumeListFragment extends
     protected void injectDependencies() {
         volumesComponent = ComicsLoverApp.getAppComponent()
                 .plusRemoteComponent(new ComicRemoteSourceModule())
-                .plusVolumesComponent();
+                .plusVolumeListComponent();
         volumesComponent.inject(this);
     }
 
