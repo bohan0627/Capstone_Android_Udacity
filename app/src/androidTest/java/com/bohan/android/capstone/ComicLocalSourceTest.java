@@ -3,7 +3,7 @@ package com.bohan.android.capstone;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.bohan.android.capstone.Helper.Utils.ContentUtils;
 import com.bohan.android.capstone.model.data.Local.ComicsDBHelper;
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 

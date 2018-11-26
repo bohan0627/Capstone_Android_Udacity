@@ -3,8 +3,8 @@ package com.bohan.android.capstone.MVP.VolumeDetails;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bohan.android.capstone.Helper.ModelHelper.ComicActivity;
 import com.bohan.android.capstone.Helper.Utils.ViewUtils;
@@ -12,7 +12,7 @@ import com.bohan.android.capstone.R;
 import com.evernote.android.state.State;
 
 import butterknife.BindView;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Bo Han.

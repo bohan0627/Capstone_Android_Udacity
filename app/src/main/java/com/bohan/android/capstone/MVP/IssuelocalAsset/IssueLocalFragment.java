@@ -1,11 +1,11 @@
 package com.bohan.android.capstone.MVP.IssuelocalAsset;
 
-import android.support.v7.app.ActionBar;
+import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +29,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.bohan.android.capstone.model.ComicsLoverApp.ComicsLoverApp;
 import com.bohan.android.capstone.model.data.Local.ComicLocalSourceModule;
